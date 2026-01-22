@@ -26,7 +26,7 @@ export const Hero: React.FC<HeroProps> = ({ onStart }) => {
           </span>
           <div className="flex flex-wrap justify-center gap-x-2 md:gap-x-4 text-6xl md:text-9xl font-black tracking-tight leading-none pb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-saffron via-stone-400 to-indiaGreen drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.5)]">
-              MY INDIAN FLAG
+              my indian flag
             </span>
           </div>
         </h1>
