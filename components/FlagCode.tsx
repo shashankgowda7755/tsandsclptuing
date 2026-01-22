@@ -15,18 +15,6 @@ const FAQS = [
         link: "https://indianexpress.com/article/explained/how-to-store-tricolour-national-flag-code-rules-8093006/"
     },
     {
-        question: "Can we use plastic flags?",
-        answer: "No. Plastic flags do not meet the official standards. Use flags made from cotton, polyester, wool, silk, or khadi.",
-        source: "postalstudy",
-        link: "https://www.postalstudy.in/2022/08/salient-features-of-national-flag-code.html"
-    },
-    {
-        question: "What is the correct 3:2 ratio?",
-        answer: "For every 3 units of length, the flag should be 2 units wide. Examples: 90cm × 60cm, 60cm × 40cm, 30cm × 20cm.",
-        source: "nsiindia.gov",
-        link: "http://www.nsiindia.gov.in/writereaddata/FileUploads/harghartiranga.pdf"
-    },
-    {
         question: "Can we hoist the flag on rainy days?",
         answer: "It is better to avoid hoisting the flag during heavy rain to prevent damage. If the flag is already displayed, bring it down safely.",
         source: "vajiramandravi",
@@ -131,7 +119,7 @@ export const FlagCode: React.FC = () => {
                     <div className="w-24 h-1 bg-gradient-to-r from-saffron via-stone-200 to-indiaGreen mb-8 border border-stone-200"></div>
 
                     <p className="text-lg text-stone-700 max-w-2xl leading-relaxed">
-                        The Indian flag is governed by the <strong>Flag Code of India, 2002</strong> and the <strong>Prevention of Insults to National Honour Act, 1971</strong>. This section provides schools and citizens with complete guidance on how to properly use, respect, store, and dispose of the Indian flag in line with official rules.
+                        The Indian flag is governed by the <strong>Flag Code of India, 2002</strong> and the <strong>Prevention of Insults to National Honour Act, 1971</strong>. This section provides complete guidance on how to properly use, respect, store, and dispose of the Indian flag in line with official rules.
                     </p>
                 </div>
 
@@ -142,23 +130,14 @@ export const FlagCode: React.FC = () => {
                             <span className="bg-saffron/10 text-saffron w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">1</span>
                             The Indian Flag: Design & Specification
                         </h3>
-                        <div className="grid md:grid-cols-3 gap-6">
+                        <div className="grid md:grid-cols-2 gap-6">
                             <div className="bg-stone-50 p-6 rounded-xl border border-stone-100">
                                 <h4 className="font-bold text-stone-900 mb-3">Official Design</h4>
                                 <p className="text-sm text-stone-700">Three equal horizontal bands: <strong className="text-orange-600">Saffron (top)</strong>, White (middle), and <strong className="text-green-600">Green (bottom)</strong>. Centre has the <strong>Ashoka Chakra</strong> (navy blue wheel with 24 spokes).</p>
                             </div>
                             <div className="bg-stone-50 p-6 rounded-xl border border-stone-100">
-                                <h4 className="font-bold text-stone-900 mb-3">Correct Ratio</h4>
-                                <p className="text-sm text-stone-700 mb-2">Must follow a <strong>length-to-width ratio of 3:2</strong>.</p>
-                                <ul className="text-xs text-stone-500 list-disc ml-4 space-y-1">
-                                    <li>90cm × 60cm (Correct)</li>
-                                    <li>60cm × 40cm (Correct)</li>
-                                </ul>
-                            </div>
-                            <div className="bg-stone-50 p-6 rounded-xl border border-stone-100">
                                 <h4 className="font-bold text-stone-900 mb-3">Permitted Materials</h4>
                                 <p className="text-sm text-stone-700 mb-2"><strong>Natural or semi-natural fibres</strong>: Cotton, Polyester, Wool, Silk, Khadi.</p>
-                                <p className="text-xs text-red-600 font-medium">Do NOT use plastic flags.</p>
                             </div>
                         </div>
                     </section>
@@ -198,7 +177,6 @@ export const FlagCode: React.FC = () => {
                                 <ul className="space-y-3">
                                     {[
                                         "Don't display torn, faded, or damaged flags.",
-                                        "Don't fly at night without proper lighting.",
                                         "Don't fly on the same pole as another flag.",
                                         "Don't place anything above or in front of the flag.",
                                         "Don't use covering for stages, podiums, or vehicles."
@@ -251,8 +229,7 @@ export const FlagCode: React.FC = () => {
                                         "Don't use as clothing, costume, or accessory.",
                                         "Don't use as cushion, napkin, or decor.",
                                         "Don't use for commercial ads or branding.",
-                                        "Don't use on private vehicles without permission.",
-                                        "Don't discard paper flags on ground/dustbins."
+                                        "Don't use on private vehicles without permission."
                                     ].map((item, i) => (
                                         <li key={i} className="flex gap-3 text-stone-700 text-sm">
                                             <span className="text-red-500 mt-1">✗</span>
