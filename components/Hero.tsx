@@ -21,15 +21,23 @@ export const Hero: React.FC<HeroProps> = ({ onStart }) => {
             Pledge for
           </span>
           <div className="flex justify-center gap-x-2 md:gap-x-4 text-5xl md:text-7xl lg:text-[10rem] font-black tracking-wide leading-none pb-6 whitespace-nowrap">
-            <span className="text-transparent bg-clip-text" style={{
-              backgroundImage: 'linear-gradient(180deg, #FF671F 0%, #FFFFFF 53%, #046A38 100%)',
-              WebkitTextStroke: '2px #1c1917',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              paddingBottom: '0.1em'
-            }}>
-              My Indian Flag
-            </span>
+            <div className="relative inline-block pb-[0.1em]">
+              {/* Outline Layer (Behind) - Thicker stroke simulates 'outside' alignment when overlapped */}
+              <span className="absolute inset-0 z-0 text-transparent select-none" aria-hidden="true" style={{
+                WebkitTextStroke: '6px #1c1917',
+              }}>
+                My Indian Flag
+              </span>
+
+              {/* Gradient Fill Layer (Front) - Clean gradient without stroke */}
+              <span className="relative z-10 text-transparent bg-clip-text" style={{
+                backgroundImage: 'linear-gradient(180deg, #FF671F 0%, #FFFFFF 53%, #046A38 100%)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+              }}>
+                My Indian Flag
+              </span>
+            </div>
           </div>
         </h1>
 
