@@ -9,13 +9,9 @@ export const Hero: React.FC<HeroProps> = ({ onStart }) => {
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center relative overflow-hidden bg-white selection:bg-orange-100 selection:text-orange-900 pt-20 pb-10">
 
-      {/* Enhanced Tricolor Mesh Background */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-saffron/15 rounded-full blur-[100px] mix-blend-multiply animate-blob" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-indiaGreen/15 rounded-full blur-[100px] mix-blend-multiply animate-blob animation-delay-2000" />
-        <div className="absolute top-[40%] left-[40%] w-[500px] h-[500px] bg-indiaNavy/5 rounded-full blur-[100px] mix-blend-multiply animate-blob animation-delay-4000" />
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' fill='%23ffffff'/%3E%3C/svg%3E")` }} />
-      </div>
+      {/* Soft Gradient Background (Reference Match) */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none"
+        style={{ background: 'linear-gradient(180deg, #FFF0E5 0%, #FFFFFF 45%, #E6F4EA 100%)' }} />
 
       <div className="relative z-10 w-full max-w-5xl px-6 flex flex-col items-center text-center">
 
@@ -25,7 +21,13 @@ export const Hero: React.FC<HeroProps> = ({ onStart }) => {
             Pledge for
           </span>
           <div className="flex justify-center gap-x-2 md:gap-x-4 text-5xl md:text-7xl lg:text-[10rem] font-black tracking-wide leading-none pb-6 whitespace-nowrap">
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-saffron via-white to-indiaGreen animate-gradient">
+            <span className="text-transparent bg-clip-text" style={{
+              backgroundImage: 'linear-gradient(180deg, #FF671F 0%, #FFFFFF 53%, #046A38 100%)',
+              WebkitTextStroke: '2px #1c1917',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              paddingBottom: '0.1em'
+            }}>
               My Indian Flag
             </span>
           </div>
