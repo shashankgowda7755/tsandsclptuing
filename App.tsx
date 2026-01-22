@@ -200,10 +200,10 @@ const App: React.FC = () => {
 
               <div className="max-w-4xl mx-auto text-center relative z-10">
                 <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6">
-                  Join millions of Indians in this Movement.
+                  Join US in this Movement.
                 </h2>
                 <p className="text-stone-400 text-lg mb-10 max-w-2xl mx-auto">
-                  Commit to respect and honour the Tricolour. Your pledge is a promise to the nation.
+                  Commit to respect and honour the Flag. Your pledge is a promise to the nation.
                 </p>
                 <button
                   onClick={handleStart}
