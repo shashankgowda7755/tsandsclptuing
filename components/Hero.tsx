@@ -21,7 +21,7 @@ export const Hero: React.FC<HeroProps> = ({ onStart }) => {
 
         {/* Main Heading */}
         <h1 className="font-display font-black tracking-tighter leading-[0.85] mb-6 animate-slide-up" style={{ animationDelay: '100ms' }}>
-          <span className="block text-5xl md:text-8xl text-stone-300 mb-2 tracking-tight">
+          <span className="block text-5xl md:text-8xl text-stone-500 mb-2 tracking-tight">
             Pledge for
           </span>
           <div className="flex flex-wrap justify-center gap-x-2 md:gap-x-4 text-6xl md:text-9xl font-black tracking-tight leading-none pb-4">
