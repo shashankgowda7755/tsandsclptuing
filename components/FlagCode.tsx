@@ -159,9 +159,7 @@ export const FlagCode: React.FC = () => {
                                         "Display in a position of prominence and respect.",
                                         "Ensure flag is clean, bright, and undamaged.",
                                         "Fly upright and fully unfurled.",
-                                        "Use a proper flag staff or stand.",
-                                        "Display on all days if proper facilities exist.",
-                                        "Place at centre/highest point if with other flags."
+                                        "Use a proper flag staff or stand."
                                     ].map((item, i) => (
                                         <li key={i} className="flex gap-3 text-stone-700 text-sm">
                                             <span className="text-indiaGreen mt-1">✓</span>
@@ -241,7 +239,36 @@ export const FlagCode: React.FC = () => {
                         </div>
                     </section>
 
-                    {/* 4. What counts as disrespect */}
+                    {/* 4. How to Fold the National Flag */}
+                    <section>
+                        <h3 className="text-2xl font-bold text-indiaNavy mb-6 flex items-center gap-3">
+                            <span className="bg-indiaNavy/10 text-indiaNavy w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">4</span>
+                            How to Fold the National Flag
+                        </h3>
+                        <div className="bg-stone-50 rounded-2xl p-6 md:p-8 border border-stone-200">
+                            <p className="text-stone-700 mb-6 text-sm md:text-base">To fold the flag respectfully for storage, follow the 3-step official protocol:</p>
+
+                            <div className="grid md:grid-cols-3 gap-6">
+                                <div className="space-y-3">
+                                    <div className="w-10 h-10 bg-white shadow-sm rounded-lg flex items-center justify-center font-bold text-indiaNavy border border-stone-100">1</div>
+                                    <h4 className="font-bold text-stone-900">Horizontal Placement</h4>
+                                    <p className="text-sm text-stone-600">Place the flag horizontally on a clean surface.</p>
+                                </div>
+                                <div className="space-y-3">
+                                    <div className="w-10 h-10 bg-white shadow-sm rounded-lg flex items-center justify-center font-bold text-indiaNavy border border-stone-100">2</div>
+                                    <h4 className="font-bold text-stone-900">Base Fold</h4>
+                                    <p className="text-sm text-stone-600">Fold the Saffron and Green bands beneath the White band simultaneously.</p>
+                                </div>
+                                <div className="space-y-3">
+                                    <div className="w-10 h-10 bg-white shadow-sm rounded-lg flex items-center justify-center font-bold text-indiaNavy border border-stone-100">3</div>
+                                    <h4 className="font-bold text-stone-900">Final Fold</h4>
+                                    <p className="text-sm text-stone-600">Fold the White band from left and right towards the center so only the Chakra is visible.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* 5. What counts as disrespect */}
                     <section className="bg-orange-50/50 border border-saffron/10 rounded-2xl p-8">
                         <h3 className="text-xl font-bold text-indiaNavy mb-4 flex items-center gap-2">
                             <AlertTriangle className="text-saffron" />
@@ -263,10 +290,10 @@ export const FlagCode: React.FC = () => {
                         </ul>
                     </section>
 
-                    {/* 5. Disposal */}
+                    {/* 6. Disposal */}
                     <section>
                         <h3 className="text-2xl font-bold text-indiaNavy mb-6 flex items-center gap-3">
-                            <span className="bg-stone-200 text-stone-700 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">5</span>
+                            <span className="bg-stone-200 text-stone-700 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">6</span>
                             How to dispose of a damaged flag
                         </h3>
                         <p className="text-stone-700 mb-6">Dispose only when ripped, soiled, faded, or unfit for display.</p>
@@ -309,7 +336,7 @@ export const FlagCode: React.FC = () => {
                         </div>
                     </section>
 
-                    {/* 6. Participation */}
+                    {/* 7. Participation */}
                     <section>
                         <h3 className="text-2xl font-bold text-indiaNavy mb-6">How Schools Can Participate</h3>
                         <div className="bg-[#1c1917] rounded-3xl p-8 md:p-12 relative overflow-hidden">
@@ -362,7 +389,7 @@ export const FlagCode: React.FC = () => {
                         </div>
                     </section>
 
-                    {/* 7. FAQs */}
+                    {/* 8. FAQs */}
                     <section>
                         <h3 className="text-2xl font-bold text-indiaNavy mb-8">Frequently Asked Questions</h3>
                         <div className="grid gap-3">
@@ -385,7 +412,7 @@ export const FlagCode: React.FC = () => {
                         </div>
                     </section>
 
-                    {/* 8. Official References */}
+                    {/* 9. Official References */}
                     <section>
                         <h3 className="text-2xl font-bold text-indiaNavy mb-6 border-b border-stone-200 pb-4">Official References</h3>
                         <div className="grid gap-4 md:grid-cols-2">
