@@ -396,7 +396,7 @@ export const UserForm: React.FC<UserFormProps> = ({ userData, setUserData, onBac
                 </div>
               </div>
               <label htmlFor="privacyConsent" className="text-sm text-slate-600 cursor-pointer select-none leading-tight">
-                I agree to receive information about similar civic initiatives in the future.
+                I agree to receive information about similar initiatives in the future.
               </label>
             </div>
 
