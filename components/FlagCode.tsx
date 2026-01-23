@@ -330,7 +330,7 @@ export const FlagCode: React.FC = () => {
                             <span className="bg-stone-200 text-stone-700 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">6</span>
                             How to dispose of a damaged flag
                         </h3>
-                        <p className="text-stone-700 mb-6">Dispose only when ripped, soiled, faded, or unfit for display.</p>
+                        <p className="text-stone-700 mb-6">Dispose only when ripped, soiled, faded, or not suitable for display.</p>
 
                         <div className="grid md:grid-cols-2 gap-6 mb-8">
                             <div className="group hover:bg-stone-50 transition-colors p-6 rounded-2xl border border-stone-200">
