@@ -15,6 +15,14 @@ export const Hero: React.FC<HeroProps> = ({ onStart }) => {
 
       <div className="relative z-10 w-full max-w-5xl px-6 flex flex-col items-center text-center">
 
+        {/* National Pride Initiative Badge */}
+        <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-orange-50 border border-orange-100 shadow-sm mb-8 animate-fade-in">
+          <span className="w-3 h-3 rounded-full bg-[#F4A261]"></span>
+          <span className="text-[#9C4221] font-bold tracking-widest text-sm uppercase">
+            NATIONAL PRIDE INITIATIVE
+          </span>
+        </div>
+
         {/* Main Heading */}
         <h1 className="font-display font-black tracking-tighter leading-[0.85] mb-6 animate-slide-up" style={{ animationDelay: '100ms' }}>
           <span className="block text-5xl md:text-8xl text-stone-700 mb-4 tracking-tight font-bold">

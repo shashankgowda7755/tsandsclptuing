@@ -252,11 +252,11 @@ export const FlagCode: React.FC = () => {
                         </div>
                     </section>
 
-                    {/* 5. Legal Warning */}
+                    {/* 5. Warning */}
                     <section className="bg-orange-50/50 border border-saffron/10 rounded-2xl p-8">
                         <h3 className="text-xl font-bold text-indiaNavy mb-4 flex items-center gap-2">
                             <AlertTriangle className="text-saffron" />
-                            Legal Warning
+                            Warning
                         </h3>
                         <p className="text-orange-800 text-sm mb-4">Disrespecting the National Flag is a punishable offence by law. Please ensure:</p>
                         <ul className="grid md:grid-cols-2 gap-4">
