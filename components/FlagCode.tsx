@@ -114,28 +114,65 @@ export const FlagCode: React.FC = () => {
                             <span className="bg-saffron/10 text-saffron w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">1</span>
                             The Indian Flag: Design & Specification
                         </h3>
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div className="bg-stone-50 p-6 rounded-xl border border-stone-100">
-                                <h4 className="font-bold text-stone-900 mb-3">Official Design</h4>
-                                <p className="text-sm text-stone-700">Three equal horizontal bands: <strong className="text-orange-600">Saffron (top)</strong>, White (middle), and <strong className="text-green-600">Green (bottom)</strong>. Centre has the <strong>Ashoka Chakra</strong> (navy blue wheel with 24 spokes).</p>
+                        <div className="grid md:grid-cols-3 gap-6">
+
+                            {/* Card 1: Official Design */}
+                            <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                                <div>
+                                    <h4 className="font-bold text-lg text-stone-900 mb-4">Official Design</h4>
+                                    <p className="text-stone-500 text-sm mb-4">Three equal horizontal bands:</p>
+                                    <ul className="space-y-3 mb-6">
+                                        <li className="flex items-center gap-3 text-stone-800 font-medium text-sm">
+                                            <span className="w-3 h-3 rounded-full bg-[#FF671F]"></span> Saffron (Top)
+                                        </li>
+                                        <li className="flex items-center gap-3 text-stone-800 font-medium text-sm">
+                                            <span className="w-3 h-3 rounded-full bg-white border border-stone-200"></span> White (Middle)
+                                        </li>
+                                        <li className="flex items-center gap-3 text-stone-800 font-medium text-sm">
+                                            <span className="w-3 h-3 rounded-full bg-[#046A38]"></span> Green (Bottom)
+                                        </li>
+                                    </ul>
+                                </div>
+                                <p className="text-xs text-stone-400 leading-relaxed border-t border-stone-100 pt-4">
+                                    With <strong>Ashoka Chakra</strong> (Navy Blue, 24 spokes) in the center.
+                                </p>
                             </div>
-                            <div className="bg-stone-50 p-6 rounded-xl border border-stone-100">
-                                <h4 className="font-bold text-stone-900 mb-3">Permitted Materials</h4>
-                                <p className="text-sm text-stone-700 mb-2"><strong>Natural or semi-natural fibres</strong>: Cotton, Polyester, Wool, Silk, Khadi.</p>
-                            </div>
-                            <div className="bg-stone-50 p-6 rounded-xl border border-stone-100">
-                                <h4 className="font-bold text-stone-900 mb-3">Correct Ratio</h4>
-                                <p className="text-3xl font-bold text-indiaNavy mb-1">3:2</p>
-                                <p className="text-xs text-stone-500 uppercase tracking-widest font-bold">Length to Width</p>
-                            </div>
-                            <div className="bg-stone-50 p-6 rounded-xl border border-stone-100">
-                                <h4 className="font-bold text-stone-900 mb-3">Standard Sizes</h4>
-                                <ul className="space-y-1 text-sm text-stone-700 font-medium">
-                                    <li>90cm × 60cm</li>
-                                    <li>60cm × 40cm</li>
-                                    <li>30cm × 20cm</li>
+
+                            {/* Card 2: Correct Ratio */}
+                            <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+                                <h4 className="font-bold text-lg text-stone-900 mb-2">Correct Ratio</h4>
+                                <div className="mb-4">
+                                    <span className="text-6xl font-black text-stone-100 tracking-tighter">3:2</span>
+                                </div>
+                                <p className="text-stone-500 font-bold text-sm mb-6">Length to Width Ratio</p>
+                                <ul className="space-y-2 text-stone-600 text-sm font-medium pl-1">
+                                    <li className="flex items-center gap-2"><span className="w-1 h-1 bg-stone-300 rounded-full"></span> 90cm × 60cm</li>
+                                    <li className="flex items-center gap-2"><span className="w-1 h-1 bg-stone-300 rounded-full"></span> 60cm × 40cm</li>
+                                    <li className="flex items-center gap-2"><span className="w-1 h-1 bg-stone-300 rounded-full"></span> 30cm × 20cm</li>
                                 </ul>
                             </div>
+
+                            {/* Card 3: Permitted Materials */}
+                            <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                                <div>
+                                    <h4 className="font-bold text-lg text-stone-900 mb-4">Permitted Materials</h4>
+                                    <p className="text-stone-500 text-sm mb-4">Natural or semi-natural fibres only:</p>
+                                    <div className="flex flex-wrap gap-2 mb-6">
+                                        {['Cotton', 'Polyester', 'Wool', 'Silk', 'Khadi'].map((item) => (
+                                            <span key={item} className="px-3 py-1 bg-stone-100 text-stone-600 text-xs font-bold rounded-lg">
+                                                {item}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="border-t border-stone-100 pt-4">
+                                    <div className="flex items-center gap-2 text-red-500 font-bold text-sm">
+                                        <div className="w-5 h-5 rounded-full border-2 border-red-500 flex items-center justify-center text-[10px]">&times;</div>
+                                        NO Plastic Flags
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </section>
 
