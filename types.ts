@@ -21,6 +21,7 @@ export interface School {
   isActive: boolean;          // Whether accepting submissions
   isFeatured?: boolean;       // Show on homepage
   templateId: PosterTemplate; // Which poster design to use
+  posterLogoUrl?: string;     // Override for poster-only logos
   logoPosition?: {
     left: string;
     top: string;
