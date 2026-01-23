@@ -20,7 +20,7 @@ const INITIAL_SCHOOLS: School[] = [
         icon: "🏛️",
         logoUrl: "/assets/dps_logo.jpeg",
         isActive: true,
-        isFeatured: true,
+        isFeatured: false,
         templateId: 'tricolor'
     },
     {
@@ -31,7 +31,7 @@ const INITIAL_SCHOOLS: School[] = [
         icon: "🏫",
         logoUrl: "/assets/kv_logo.png",
         isActive: true,
-        isFeatured: true,
+        isFeatured: false,
         templateId: 'tricolor'
     },
     {
@@ -42,7 +42,7 @@ const INITIAL_SCHOOLS: School[] = [
         icon: "🎓",
         logoUrl: "/assets/nps_logo.jpeg",
         isActive: true,
-        isFeatured: true,
+        isFeatured: false,
         templateId: 'tricolor'
     },
     {
