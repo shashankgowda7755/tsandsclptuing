@@ -29,7 +29,7 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
         name: userData.fullName,
         grade: userData.class,
         section: userData.section,
-        phone: `${userData.countryCode}-${userData.phone}`,
+        phone: `${userData.countryCode} ${userData.phone}`,
         email: userData.email,
         message: 'I Pledge to honor the National Flag',
         photoUrl: userData.photo,
