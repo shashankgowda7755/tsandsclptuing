@@ -21,6 +21,12 @@ export interface School {
   isActive: boolean;          // Whether accepting submissions
   isFeatured?: boolean;       // Show on homepage
   templateId: PosterTemplate; // Which poster design to use
+  logoPosition?: {
+    left: string;
+    top: string;
+    width: string;
+    height: string;
+  };
 }
 
 export interface StudentData {

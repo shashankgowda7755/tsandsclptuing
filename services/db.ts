@@ -44,6 +44,23 @@ const INITIAL_SCHOOLS: School[] = [
         isActive: true,
         isFeatured: true,
         templateId: 'tricolor'
+    },
+    {
+        id: '4',
+        name: "Vales International School",
+        location: "Chennai",
+        subLocation: "Neelankarai",
+        icon: "🏫",
+        logoUrl: "/assets/VIS_NEELANKARAI_LOGO.jpg",
+        isActive: true,
+        isFeatured: true,
+        templateId: 'tricolor',
+        logoPosition: {
+            left: "13.685%",
+            top: "85.725%",
+            width: "28.96%",
+            height: "4.725%"
+        }
     }
 ];
 

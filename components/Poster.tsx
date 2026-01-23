@@ -34,10 +34,10 @@ export const Poster: React.FC<PosterProps> = ({ id, userData, school, className 
         <div
           className="absolute z-20 flex items-center justify-center p-1"
           style={{
-            left: '23.95%',
-            top: '85.29%',
-            width: '19.14%',
-            height: '5.94%'
+            left: school.logoPosition?.left || '23.95%',
+            top: school.logoPosition?.top || '85.29%',
+            width: school.logoPosition?.width || '19.14%',
+            height: school.logoPosition?.height || '5.94%'
           }}
         >
           {school.logoUrl ? (
