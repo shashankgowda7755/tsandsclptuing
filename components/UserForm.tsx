@@ -39,33 +39,23 @@ export const UserForm: React.FC<UserFormProps> = ({ userData, setUserData, onBac
     if (isFormValid() && !isSubmitting && !submittingLock.current) {
       submittingLock.current = true;
       setIsSubmitting(true);
-      console.log('📝 Form Submission Initiated');
+      console.log('📝 Form Continue Clicked');
       console.log('👤 User Data:', userData);
       console.log('🏫 Selected School:', selectedSchool);
 
-      // Create student data object for DB
-      const studentData = {
-        name: userData.fullName,
-        grade: userData.class,
-        section: userData.section,
-        phone: `${userData.countryCode}-${userData.phone}`, // Combined for DB
-        email: userData.email,
-        message: 'I Pledge to honor the National Flag',
-        photoUrl: userData.photo,
-        optIn: userData.optInSimilarEvents
-      };
-
-      // Submit to DB (LocalStorage + Optional backends)
-      // Use selectedSchool ID or default to '1' (DPS) if none is explicitly set
-      const schoolId = selectedSchool?.id || '1';
-
+      // Just store data locally and proceed to next step
+      // Actual submission to Google Sheets will happen on Download
       try {
-        const submission = await DB.submitForm(schoolId, studentData);
-        setCurrentSubmissionId(submission.id);
+        // Generate a temporary ID for this session
+        const tempId = `temp-${Date.now()}`;
+        setCurrentSubmissionId(tempId);
+
+        // Small delay for UX (button animation)
+        await new Promise(resolve => setTimeout(resolve, 300));
+
         onContinue();
       } catch (e) {
-        console.error("Submission failed", e);
-        // Continue anyway for offline UX, or show error
+        console.error("Error:", e);
         onContinue();
       } finally {
         submittingLock.current = false;

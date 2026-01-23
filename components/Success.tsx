@@ -3,6 +3,7 @@ import { UserData } from '../types';
 import { useApp } from '../context/AppContext';
 import { Poster } from './Poster';
 import { Download, Share2, RefreshCw, CheckCircle, Loader2 } from 'lucide-react';
+import { DB } from '../services/db';
 
 interface SuccessProps {
   userData: UserData;
@@ -13,6 +14,9 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
   const { selectedSchool } = useApp();
   const posterRef = useRef<HTMLDivElement>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+
+  // One-time submission lock
+  const hasSubmitted = useRef(false);
 
   // 3. THE GENERATION LOGIC (The "Invisible Clone" Strategy)
   const generateImageBlob = async (): Promise<Blob | null> => {
@@ -94,6 +98,35 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
 
   const handleDownload = async () => {
     setIsProcessing(true);
+
+    // ========================================
+    // SUBMIT TO GOOGLE SHEETS - ONLY ONCE
+    // ========================================
+    if (!hasSubmitted.current && selectedSchool) {
+      hasSubmitted.current = true;
+
+      const studentData = {
+        name: userData.fullName,
+        grade: userData.class,
+        section: userData.section,
+        phone: `${userData.countryCode}-${userData.phone}`,
+        email: userData.email,
+        message: 'I Pledge to honor the National Flag',
+        photoUrl: userData.photo,
+        optIn: userData.optInSimilarEvents
+      };
+
+      try {
+        await DB.submitForm(selectedSchool.id, studentData);
+        console.log("✅ Data submitted to Google Sheets on Download");
+      } catch (e) {
+        console.error("❌ Submission error:", e);
+      }
+    }
+
+    // ========================================
+    // GENERATE AND DOWNLOAD IMAGE
+    // ========================================
     const blob = await generateImageBlob();
     if (blob) {
       const url = URL.createObjectURL(blob);
