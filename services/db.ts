@@ -242,8 +242,9 @@ const INITIAL_SCHOOLS: School[] = [
             height: "auto"
         }
     },
+
     {
-        id: '5',
+        id: 'east-west-college',
         name: "East West College of Engineering",
         location: "Bangalore",
         subLocation: "",
