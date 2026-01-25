@@ -80,7 +80,7 @@ const INITIAL_SCHOOLS: School[] = [
     },
     {
         id: 'hindustan-institutions',
-        name: "Hindustan Institute of technology and science",
+        name: "Hindustan Institute of Technology and Science",
         location: "Chennai",
         subLocation: "",
         icon: "🎓",
