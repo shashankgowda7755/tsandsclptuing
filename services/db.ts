@@ -241,6 +241,24 @@ const INITIAL_SCHOOLS: School[] = [
             width: "17.76%",
             height: "auto"
         }
+    },
+    {
+        id: '5',
+        name: "East West College of Engineering",
+        location: "Bangalore",
+        subLocation: "",
+        icon: "🎓",
+        logoUrl: "/assets/eastwest.png",
+        posterLogoUrl: "/assets/eastwest.png",
+        isActive: true,
+        isFeatured: true,
+        templateId: 'tricolor',
+        logoPosition: {
+            left: "31.00%",
+            top: "84.73%",
+            width: "14.00%",
+            height: "auto"
+        }
     }
 ]; // Patrician College added
 
