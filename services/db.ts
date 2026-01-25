@@ -150,24 +150,7 @@ const INITIAL_SCHOOLS: School[] = [
             height: "auto"
         }
     },
-    {
-        id: 'mm-technologies',
-        name: "Modern Medical Technologies",
-        location: "Bangalore",
-        subLocation: "",
-        icon: "🏥",
-        logoUrl: "/assets/modrenmedical.png",
-        posterLogoUrl: "/assets/modrenmedical.png",
-        isActive: true,
-        isFeatured: true,
-        templateId: 'tricolor',
-        logoPosition: {
-            left: "28.05%",
-            top: "82.73%",
-            width: "17.76%",
-            height: "auto"
-        }
-    },
+
     {
         id: '1',
         name: "Mount Seena",
