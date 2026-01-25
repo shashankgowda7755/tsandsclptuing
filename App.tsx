@@ -144,7 +144,7 @@ const App: React.FC = () => {
                     onClick={() => goToStep(Step.Directory)}
                     className="hidden md:flex items-center gap-2 text-stone-500 font-bold text-sm tracking-wider hover:text-saffron transition-colors"
                   >
-                    VIEW ALL SCHOOLS →
+                    VIEW ALL ORGANISATIONS →
                   </button>
                 </div>
 
@@ -203,7 +203,7 @@ const App: React.FC = () => {
                     onClick={() => goToStep(Step.Directory)}
                     className="text-stone-500 font-bold text-sm tracking-wider"
                   >
-                    VIEW ALL SCHOOLS →
+                    VIEW ALL ORGANISATIONS →
                   </button>
                 </div>
               </div>

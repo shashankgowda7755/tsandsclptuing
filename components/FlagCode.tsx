@@ -367,7 +367,7 @@ export const FlagCode: React.FC = () => {
 
                     {/* 7. Participation */}
                     <section>
-                        <h3 className="text-2xl font-bold text-indiaNavy mb-6">How Schools Can Participate</h3>
+                        <h3 className="text-2xl font-bold text-indiaNavy mb-6">How Citizens Can Participate</h3>
                         <div className="bg-[#1c1917] rounded-3xl p-8 md:p-12 relative overflow-hidden">
                             <div className="grid md:grid-cols-2 gap-x-12 gap-y-8 relative z-10">
                                 <div className="flex gap-4 items-start">
