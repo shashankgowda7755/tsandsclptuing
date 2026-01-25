@@ -255,7 +255,7 @@ const INITIAL_SCHOOLS: School[] = [
         templateId: 'tricolor',
         logoPosition: {
             left: "28.00%",
-            top: "84.00%",
+            top: "86.00%",
             width: "18.00%",
             height: "auto"
         }
