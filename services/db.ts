@@ -62,7 +62,7 @@ const INITIAL_SCHOOLS: School[] = [
     },
     {
         id: 'pachaiyappas',
-        name: "Pachaiyappa's College for Men",
+        name: "Pachaiyappa's College",
         location: "Kanchipuram",
         subLocation: "",
         icon: "🎓",
@@ -80,7 +80,7 @@ const INITIAL_SCHOOLS: School[] = [
     },
     {
         id: 'hindustan-uni',
-        name: "Hindustan Institute of technology and science",
+        name: "Hindustan Institute",
         location: "Chennai",
         subLocation: "",
         icon: "🎓",
@@ -98,7 +98,7 @@ const INITIAL_SCHOOLS: School[] = [
     },
     {
         id: 'hindustan-intl',
-        name: "Hindustan International School",
+        name: "Hindustan School",
         location: "Chennai",
         subLocation: "",
         icon: "🏫",
