@@ -281,7 +281,7 @@ const INITIAL_SCHOOLS: School[] = [
 
 
     {
-        id: 'living-collective',
+        id: '00',
         name: "Living Collective",
         location: "Bangalore",
         subLocation: "",
