@@ -153,8 +153,8 @@ const INITIAL_SCHOOLS: School[] = [
     {
         id: '99',
         name: "VEL Communications",
-        location: "Chennai",
-        subLocation: "Pallavaram",
+        location: "Trichy",
+        subLocation: "",
         icon: "📡",
         logoUrl: "/assets/vel.png",
         posterLogoUrl: "/assets/vel.png",
