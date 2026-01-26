@@ -299,7 +299,7 @@ const INITIAL_SCHOOLS: School[] = [
         }
     },
     {
-        id: '88',
+        id: '43',
         name: "Rotary Club Smart city Coimbatore",
         location: "Coimbatore",
         subLocation: "",
