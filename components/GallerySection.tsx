@@ -4,7 +4,7 @@ const galleryImages = [
   { src: '/assets/turtle_hero_bg_3.png', alt: 'Releasing hatchlings at dawn', span: 'col-span-1 md:col-span-2 row-span-2' },
   { src: '/assets/turtle_hero_bg_2.jpg', alt: 'Night patrol team', span: 'col-span-1' },
   { src: '/assets/turtle_hero_bg.jpeg', alt: 'Olive Ridley Turtle', span: 'col-span-1' },
-  { src: '/assets/poster_bg.png', alt: 'Conservation awareness', span: 'col-span-1 md:col-span-2' },
+  { src: '/assets/poster.png', alt: 'Conservation awareness', span: 'col-span-1 md:col-span-2' },
   // Duplicating for grid effect if needed, or just keeping these 4 for a nice mosaic
 ];
 
@@ -34,10 +34,7 @@ export const GallerySection: React.FC = () => {
             </div>
           ))}
           {/* Add a generic placeholder for user to put up more */}
-           <div className="relative group overflow-hidden rounded-2xl col-span-1 bg-gray-100 dark:bg-white/5 border-2 border-dashed border-gray-300 dark:border-white/10 flex flex-col items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-colors cursor-pointer min-h-[200px]">
-              <span className="material-icons-round text-4xl mb-2">add_a_photo</span>
-              <span className="text-sm font-bold">Add Your Story</span>
-           </div>
+
         </div>
       </div>
     </section>
