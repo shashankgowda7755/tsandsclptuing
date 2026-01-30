@@ -16,7 +16,7 @@ export const Header: React.FC<HeaderProps> = ({ onLogoClick, onJoin }) => {
             className="flex-shrink-0 flex items-center gap-2 cursor-pointer"
             onClick={onLogoClick}
           >
-             <img src="/assets/turtle_hero.png" alt="Turtle Logo" className="h-10 w-auto object-contain" />
+             <img src="/assets/turtle_hero.png" alt="Turtle Logo" className="h-10 w-auto object-contain mix-blend-multiply dark:mix-blend-screen" />
             <div>
               <h1 className="font-display font-bold text-xl tracking-tight text-midnight dark:text-white leading-none">SAVE A TURTLE</h1>
             </div>
