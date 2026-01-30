@@ -36,11 +36,11 @@ export const Poster: React.FC<PosterProps> = ({ id, userData, school, className 
       <div
         className="absolute rounded-lg overflow-hidden z-10 flex items-center justify-center bg-gray-100/50"
         style={{
-          // Standard School Poster Photo Coordinates
-          left: '26.07%',
-          top: '30.31%',
-          width: '40.78%',
-          height: '27.59%'
+          // Aligned with the 'Hafiz Khan' photo slot
+          left: '6%',
+          top: '16%',
+          width: '43%',
+          height: '29%'
         }}
       >
         {userData.photo ? (
@@ -60,24 +60,22 @@ export const Poster: React.FC<PosterProps> = ({ id, userData, school, className 
 
       {/* Layer 3: Dynamic User Name */}
       <div
-        className="absolute z-10 flex items-center justify-center"
+        className="absolute z-10 flex items-center justify-start text-left"
         style={{
-          // Standard School Poster Coordinates (1080x1600) - FORCE CENTER ALIGNMENT
-          left: '50%',
-          top: '59%', 
-          width: 'auto',
-          minWidth: '60%',
-          transform: 'translateX(-50%)',
-          height: '6.04%'
+          // Aligned with 'HAFIZ KHAN' text area
+          left: '52%',
+          top: '18%', 
+          width: '45%',
+          height: 'auto'
         }}
       >
         <h2
-          className="text-black font-bold tracking-wide leading-none w-full text-center px-1"
+          className="text-white font-bold tracking-wide leading-tight px-1 uppercase"
           style={{
             fontFamily: '"Montserrat", sans-serif',
-            fontWeight: 550,
-            whiteSpace: 'nowrap',
-            fontSize: (userData.fullName || 'Ram Kumar').length > 20 ? '14px' : (userData.fullName || 'Ram Kumar').length > 13 ? '20px' : '24px'
+            fontWeight: 700,
+            fontSize: (userData.fullName || 'Ram Kumar').length > 20 ? '32px' : '40px',
+            textShadow: '0px 2px 4px rgba(0,0,0,0.5)'
           }}
         >
           {userData.fullName || 'Ram Kumar'}
