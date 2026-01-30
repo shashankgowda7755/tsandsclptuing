@@ -83,24 +83,16 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
         const [first, ...rest] = nameText.split(' ');
         const last = rest.join(' ');
 
-        // Logic: Name > 7 chars? Reduce size by ~20%
-        // Base First: 85px -> 80% = 68px
-        // Base Last: 65px  -> 80% = 52px
+        // Logic: If EITHER > 7 chars, reduce BOTH by ~20%
+        // Base: 85px -> Reduced: 68px
+        const needsReduction = first.length > 7 || last.length > 7;
+        const uniformSize = needsReduction ? '68px' : '85px';
 
         h2Elements.forEach((el, index) => {
            const h2 = el as HTMLElement;
            const isFirst = index === 0;
-           const text = isFirst ? first : last;
-           const isLong = text.length > 7;
 
-           let fontSize;
-           if (isFirst) {
-             fontSize = isLong ? '68px' : '85px';
-           } else {
-             fontSize = isLong ? '52px' : '65px';
-           }
-
-           h2.style.fontSize = fontSize;
+           h2.style.fontSize = uniformSize;
            h2.style.whiteSpace = 'nowrap';
            h2.style.fontWeight = isFirst ? '800' : '700';
            h2.style.textAlign = 'left'; 

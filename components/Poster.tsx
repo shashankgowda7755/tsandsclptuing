@@ -74,9 +74,9 @@ export const Poster: React.FC<PosterProps> = ({ id, userData, school, className 
           const [first, ...rest] = name.split(' ');
           const last = rest.join(' ');
           
-          // Logic: Name > 7 chars? Reduce size by ~20%
-          const firstSize = first.length > 7 ? '22px' : '28px'; // 28px * 0.8 ~= 22.4px
-          const lastSize = last.length > 7 ? '18px' : '22px';   // 22px * 0.8 ~= 17.6px
+          // Logic: If EITHER part > 7 chars, reduce BOTH to ensure uniformity
+          const needsReduction = first.length > 7 || last.length > 7;
+          const uniformSize = needsReduction ? '22px' : '28px';
 
           return (
             <>
@@ -85,7 +85,7 @@ export const Poster: React.FC<PosterProps> = ({ id, userData, school, className 
                 style={{
                   fontFamily: '"Montserrat", sans-serif',
                   fontWeight: 800,
-                  fontSize: firstSize,
+                  fontSize: uniformSize,
                   textShadow: '0px 2px 4px rgba(0,0,0,0.5)',
                   marginBottom: '2px'
                 }}
@@ -97,8 +97,8 @@ export const Poster: React.FC<PosterProps> = ({ id, userData, school, className 
                   className="text-white font-bold tracking-wide leading-none px-1 uppercase"
                   style={{
                     fontFamily: '"Montserrat", sans-serif',
-                    fontWeight: 700,
-                    fontSize: lastSize,
+                    fontWeight: 700, // Kept weight difference for slight hierarchy/style if desired, or make 800 for strict match? User said "same size", implies font-size. keeping weight diff is safer for style unless asked.
+                    fontSize: uniformSize,
                     textShadow: '0px 2px 4px rgba(0,0,0,0.5)'
                   }}
                 >
