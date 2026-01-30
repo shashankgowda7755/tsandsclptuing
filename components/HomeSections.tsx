@@ -12,15 +12,15 @@ export const HomeSections: React.FC<HomeSectionsProps> = ({ onJoin, onInitiative
   return (
     <>
       {/* Report Banner */}
-      <div className="bg-primary text-white relative z-20 shadow-lg border-b-4 border-teal-800">
+      <div className="bg-primary text-white relative z-20 shadow-lg border-b-4 border-red-800">
         <div className="max-w-7xl mx-auto px-3 py-2 sm:px-6 sm:py-4 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
           <div className="flex items-center gap-3 sm:gap-4">
             <div>
               <p className="font-bold text-sm sm:text-lg leading-tight">To participate in turtle walks</p>
-              <p className="text-[10px] sm:text-xs text-teal-100 opacity-90 max-w-[250px] sm:max-w-none mx-auto sm:mx-0">Call us at 7305807017</p>
+              <p className="text-[10px] sm:text-xs text-red-100 opacity-90 max-w-[250px] sm:max-w-none mx-auto sm:mx-0">Call us at 7305807017</p>
             </div>
           </div>
-          <a className="flex items-center gap-1.5 sm:gap-2 bg-white text-primary px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full font-bold text-xs sm:text-sm hover:bg-teal-50 transition-colors shadow-sm" href="tel:+917305807017">
+          <a className="flex items-center gap-1.5 sm:gap-2 bg-white text-primary px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full font-bold text-xs sm:text-sm hover:bg-red-50 transition-colors shadow-sm" href="tel:+917305807017">
             <span className="material-icons-round text-lg sm:text-xl">phone_in_talk</span>
             7305807017
           </a>
