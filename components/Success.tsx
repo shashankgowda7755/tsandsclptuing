@@ -127,42 +127,63 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
   };
 
   const handleDownload = async () => {
-    setIsProcessing(true);
-    const blob = await generateImageBlob();
-    if (blob) {
+    try {
+      if (!userData?.fullName) {
+        onReset(); // Go back if no data
+        return;
+      }
+
+      setIsProcessing(true);
+      
+      // 1. Generate the Image
+      const blob = await generateImageBlob(); // Renamed from generateImage() to match existing
+      if (!blob) throw new Error('Failed to generate image');
+      
+      // 2. Create Download Link
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `Flag_Pledge_${userData.fullName.replace(/\s+/g, '_')}.png`;
+      link.download = `Turtle_Pledge_${userData.fullName.replace(/\s+/g, '_')}.png`; // Updated filename
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      URL.revokeObjectURL(url); // Cleanup
+
+      setIsProcessing(false); // Renamed from setIsGenerating
+
+    } catch (error) {
+      console.error('Download error:', error);
+      setIsProcessing(false); // Renamed from setIsGenerating
+      alert('Could not download image. Please try again.');
     }
-    setIsProcessing(false);
   };
 
   const handleShare = async () => {
-    setIsProcessing(true);
-    const blob = await generateImageBlob();
-    if (blob) {
-      const file = new File([blob], `flag_pledge.png`, { type: 'image/png' });
-      if (navigator.share) {
-        try {
-          await navigator.share({
-            files: [file],
-            title: 'My Flag Pledge',
-            text: `I’ve taken the pledge to respect and honour our National Flag.\nI invite you to take the pledge here:\nhttps://myindiaflagpledge.vercel.app/\n\n#MyFlagPledge`,
-          });
-        } catch (error) {
-          console.log('Share aborted', error);
-        }
+    try {
+      if (!userData?.fullName) return;
+
+      setIsProcessing(true); // Renamed from setIsGenerating
+
+      const blob = await generateImageBlob(); // Renamed from generateImage() to match existing
+      if (!blob) throw new Error('Failed to capture image');
+
+      const file = new File([blob], `turtle_pledge.png`, { type: 'image/png' });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: 'My Turtle Pledge', // Updated title
+          text: `I’ve taken the pledge to protect and conserve our sea turtles.\nI invite you to take the pledge here:\nhttps://saveaturtle.in/\n\n#SaveATurtle #TurtlePledge`, // Updated text
+        });
       } else {
-        alert("Sharing is not supported on this browser. Downloading instead.");
-        handleDownload();
+        // Fallback
+        alert('Sharing is not supported on this browser/device.'); // Updated alert
       }
+      setIsProcessing(false); // Renamed from setIsGenerating
+    } catch (error) {
+      console.error('Share error:', error);
+      setIsProcessing(false); // Renamed from setIsGenerating
     }
-    setIsProcessing(false);
   };
 
   return (
@@ -171,13 +192,13 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
       <div className="w-full max-w-lg flex flex-col items-center text-center animate-fade-in">
 
         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
-          <CheckCircle size={32} className="text-green-600" />
+          {/* Replaced CheckCircle with material-icons-round */}
+          <span className="material-icons-round text-4xl text-green-600">volunteer_activism</span>
         </div>
 
-        <h1 className="text-3xl font-display font-bold text-indiaNavy mb-2">Pledge Taken! 🇮🇳</h1>
+        <h1 className="text-3xl font-display font-bold text-indiaNavy mb-2">Pledge Taken! 🐢</h1> {/* Updated emoji */}
         <p className="text-stone-500 mb-8">
-          Thank you, <span className="font-bold text-stone-800">{userData.fullName}</span>.<br />
-          You have successfully pledged to honor the Flag.
+          You have successfully pledged to protect our marine life. {/* Updated text */}
         </p>
 
         {/* Visible Preview Area */}

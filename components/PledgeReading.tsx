@@ -11,16 +11,14 @@ interface PledgeReadingProps {
 // The pledge text to be read aloud (word by word)
 // Breakdown of the pledge into individual points for the user to agree to
 const PLEDGE_POINTS = [
-  "I pledge to hoist the Indian National Flag correctly, with the saffron band on top.",
-  "I pledge to display the Indian National Flag only on a proper staff or stand.",
-  "I pledge to use Indian National Flags made from non-plastic, eco-friendly materials.",
-  "I pledge to display the Indian National Flag only when it is clean, dignified, and in good condition.",
-  "I pledge not to misuse the Indian National Flag as clothing, decoration, or for advertising purposes.",
-  "I pledge not to print, write, paste, or place anything on the Indian National Flag.",
-  "I pledge to ensure that the Indian National Flag never touches the ground, water, or any unclean surface.",
-  "I pledge to handle, fold, and store the Indian National Flag with care and respect, strictly following the Flag Code of India.",
-  "I pledge to collect Indian National Flags after events, ensure they are not left in public places.",
-  "I pledge to dispose of damaged flags respectfully through proper methods such as private burning or burial."
+  "I pledge to keep beaches clean and carry away all trash, ensuring that no plastic or debris enters the ocean to harm marine life.",
+  "I pledge to avoid using single-use plastics, such as straws and bags, which are often mistaken for food by sea turtles.",
+  "I pledge to maintain a respectful distance from nesting turtles and hatchlings, ensuring I do not disturb their natural journey to the sea.",
+  "I pledge to turn off or shield bright lights near nesting beaches, as artificial light can disorient hatchlings and lead them away from the water.",
+  "I pledge to never touch, handle, or interfere with turtle eggs or nests found in the wild.",
+  "I pledge to support and promote sustainable seafood choices that use turtle-excluder devices (TEDs) to prevent accidental trapping in fishing nets.",
+  "I pledge to educate others about the importance of sea turtles in maintaining healthy seagrass beds and coral reefs.",
+  "I pledge to report any injured or stranded sea turtles to the local wildlife authorities or rescue centers immediately."
 ];
 
 export const PledgeReading: React.FC<PledgeReadingProps> = ({ userData, onBack, onConfirm }) => {
