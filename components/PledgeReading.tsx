@@ -50,7 +50,7 @@ export const PledgeReading: React.FC<PledgeReadingProps> = ({ userData, onBack, 
         <button onClick={onBack} className="text-subText hover:text-indiaNavy font-medium mb-4 block">
           ← Back to Preview
         </button>
-        <h2 className="text-2xl font-display font-bold text-indiaNavy">Flag Code of India</h2>
+        <h2 className="text-2xl font-display font-bold text-indiaNavy">Save a Turtle Initiative</h2>
         <p className="text-sm text-subText mt-1">Read and acknowledge each point to continue.</p>
       </div>
 
@@ -58,7 +58,7 @@ export const PledgeReading: React.FC<PledgeReadingProps> = ({ userData, onBack, 
       <div className="flex-1 bg-white rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.05)] overflow-hidden relative max-w-lg mx-auto w-full border border-stone-100 flex flex-col">
 
         {/* Header decoration */}
-        <div className="h-2 w-full bg-gradient-to-r from-saffron via-stone-200 to-indiaGreen" />
+        <div className="h-2 w-full bg-gradient-to-r from-teal-400 via-blue-500 to-emerald-600" />
 
         <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 pb-40">
 
