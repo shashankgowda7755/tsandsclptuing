@@ -60,26 +60,51 @@ export const Poster: React.FC<PosterProps> = ({ id, userData, school, className 
 
       {/* Layer 3: Dynamic User Name */}
       <div
-        className="absolute z-10 flex items-center justify-start text-left"
+        className="absolute z-10 flex flex-col items-start justify-center text-left"
         style={{
           // Shifted left and up to overlay 'HAFIZ KHAN' exactly
-          left: '51%', 
-          top: '19.5%', 
+          left: '51%',
+          top: '19.5%',
           width: '40%',
           height: 'auto'
         }}
       >
-        <h2
-          className="text-white font-bold tracking-wide leading-tight px-1 uppercase"
-          style={{
-            fontFamily: '"Montserrat", sans-serif',
-            fontWeight: 700,
-            fontSize: (userData.fullName || 'Ram Kumar').length > 20 ? '14px' : '22px',
-            textShadow: '0px 2px 4px rgba(0,0,0,0.5)'
-          }}
-        >
-          {userData.fullName || 'Ram Kumar'}
-        </h2>
+        {(() => {
+          const name = userData.fullName || 'Ram Kumar';
+          const [first, ...rest] = name.split(' ');
+          const last = rest.join(' ');
+          const isLongName = name.length > 20;
+
+          return (
+            <>
+              <h2
+                className="text-white font-bold tracking-wide leading-none px-1 uppercase"
+                style={{
+                  fontFamily: '"Montserrat", sans-serif',
+                  fontWeight: 800,
+                  fontSize: isLongName ? '18px' : '28px', // Increased size for better visibility
+                  textShadow: '0px 2px 4px rgba(0,0,0,0.5)',
+                  marginBottom: '2px'
+                }}
+              >
+                {first}
+              </h2>
+              {last && (
+                <h2
+                  className="text-white font-bold tracking-wide leading-none px-1 uppercase"
+                  style={{
+                    fontFamily: '"Montserrat", sans-serif',
+                    fontWeight: 700,
+                    fontSize: isLongName ? '14px' : '22px', // Slightly smaller for last name
+                    textShadow: '0px 2px 4px rgba(0,0,0,0.5)'
+                  }}
+                >
+                  {last}
+                </h2>
+              )}
+            </>
+          );
+        })()}
       </div>
 
 

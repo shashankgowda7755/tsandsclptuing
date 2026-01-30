@@ -75,27 +75,27 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
       clone.style.borderRadius = '0'; // Ensure no rounded corners on the output image
 
       // Fix text size for the HD clone (since we forced width to 800px)
-      // The snippet specifically sets h2 to 32px
-      const nameElement = clone.querySelector('h2');
-      if (nameElement) {
-        // Updated logic: Increase size to match 1080px width
-        // Base width 1080px -> Font ~75px
+      // Since we changed to multiple h2s in Poster.tsx, we need to style them individually
+      const nameContainer = clone.querySelector('div[style*="left: 51%"]');
+      if (nameContainer) {
+        const h2Elements = nameContainer.querySelectorAll('h2');
         const nameLength = userData.fullName.length;
-        nameElement.style.fontSize = nameLength > 20 ? '45px' : nameLength > 13 ? '60px' : '75px';
-        nameElement.style.whiteSpace = 'nowrap';
-        nameElement.style.fontWeight = '550';
-        nameElement.style.textAlign = 'center';
-        nameElement.style.fontFamily = '"Montserrat", sans-serif';
+        const isLongName = nameLength > 20;
 
-        // Fix positioning: Move to center and slightly up (57%) as per user request
-        const nameContainer = nameElement.parentElement;
-        if (nameContainer) {
-          // We no longer manually override position here.
-          // Poster.tsx now handles specific layouts (Public vs School) correctly.
-          // nameContainer.style.width = '100%';
-          // nameContainer.style.left = '0';
-          // nameContainer.style.top = '59%'; 
-        }
+        // Base font sizes for HD (scaled up from poster)
+        const baseFirstSize = isLongName ? '55px' : '85px';
+        const baseLastSize = isLongName ? '40px' : '65px';
+
+        h2Elements.forEach((el, index) => {
+           const h2 = el as HTMLElement;
+           h2.style.fontSize = index === 0 ? baseFirstSize : baseLastSize;
+           h2.style.whiteSpace = 'nowrap';
+           h2.style.fontWeight = index === 0 ? '800' : '700';
+           h2.style.textAlign = 'left'; 
+           h2.style.fontFamily = '"Montserrat", sans-serif';
+           h2.style.marginBottom = index === 0 ? '5px' : '0'; // Add spacing between lines
+           h2.style.display = 'block'; // Ensure block display for vertical stacking
+        });
       }
 
       // Explicitly apply grayscale to user photo for html2canvas to pick it up
