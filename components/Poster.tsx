@@ -36,11 +36,11 @@ export const Poster: React.FC<PosterProps> = ({ id, userData, school, className 
       <div
         className="absolute rounded-lg overflow-hidden z-10 flex items-center justify-center bg-gray-100/50"
         style={{
-          // Adjusted: 'wider and less length'
-          left: '4.9%',
+          // Adjusted: '3 percent length' (Left 3%, Height 31%)
+          left: '3%',
           top: '16.8%',
-          width: '55%',
-          height: '34%'
+          width: '56%',
+          height: '31%'
         }}
       >
         {userData.photo ? (
@@ -63,9 +63,9 @@ export const Poster: React.FC<PosterProps> = ({ id, userData, school, className 
         className="absolute z-10 flex items-center justify-start text-left"
         style={{
           // Shifted right to accommodate wider photo
-          left: '55%', // was 52%
+          left: '58%', 
           top: '19%', 
-          width: '45%',
+          width: '40%',
           height: 'auto'
         }}
       >
