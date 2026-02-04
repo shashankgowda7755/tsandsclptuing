@@ -13,6 +13,7 @@ import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { InitiativeDetail } from './components/InitiativeDetail';
 import { UserData, Step } from './types';
 import { DB } from './services/db';
+import { startQueueSync } from './services/submissionQueue';
 import { useApp } from './context/AppContext';
 
 // 🚀 Performance: Preload critical assets on app mount
@@ -49,6 +50,7 @@ const App: React.FC = () => {
   // 🚀 Preload assets on mount and set title
   useEffect(() => {
     preloadAssets();
+    const cleanupSync = startQueueSync(); // 🔄 Start offline sync
     document.title = "Save a Turtle";
 
     // 🔗 Check for direct org link parameter
@@ -65,6 +67,8 @@ const App: React.FC = () => {
         setTimeout(() => setCurrentStep(Step.Form), 100);
       }
     }
+
+    return () => cleanupSync();
   }, [setSelectedSchool]);
 
   // 🚀 Smooth step transition with fade effect

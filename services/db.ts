@@ -1,4 +1,5 @@
 import { School, Submission, StudentData } from '../types';
+import { enqueueSubmission } from './submissionQueue';
 
 // ==========================================
 // CONFIGURATION
@@ -395,42 +396,54 @@ export const DB = {
         }
 
         // ========================================
-        // TIER 2: GOOGLE SHEETS (If configured)
+        // TIER 2: SUPABASE QUEUE (Primary High-Load Strategy)
+        // ========================================
+        // This is non-blocking and highly reliable for 1000+ users
+        enqueueSubmission(newSubmission);
+
+        // ========================================
+        // TIER 3: GOOGLE SHEETS (Legacy / Backup)
         // ========================================
         if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.startsWith('http')) {
-            try {
-                // Add Auth Token for Security
-                const payload = {
-                    ...newSubmission,
-                    auth_token: import.meta.env.VITE_API_TOKEN || ''
-                };
+            // We do NOT await this to ensure the UI is snappy even if Google Scripts is slow.
+            // The Supabase Queue handles the reliable data storage.
+            (async () => {
+                try {
+                    // Add Auth Token for Security
+                    const payload = {
+                        ...newSubmission,
+                        auth_token: import.meta.env.VITE_API_TOKEN || ''
+                    };
 
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // Required for Google Apps Script
-                    headers: { 'Content-Type': 'text/plain' }, // Using text/plain ensures e.postData.contents is populated without CORS preflight issues
-                    body: JSON.stringify(payload)
-                });
-                console.log("✅ Sent to Google Sheets");
-            } catch (error) {
-                console.error("❌ Google Script Error:", error);
-            }
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors', // Required for Google Apps Script
+                        headers: { 'Content-Type': 'text/plain' }, // Using text/plain ensures e.postData.contents is populated without CORS preflight issues
+                        body: JSON.stringify(payload)
+                    });
+                    console.log("✅ Sent to Google Sheets");
+                } catch (error) {
+                    console.error("❌ Google Script Error:", error);
+                }
+            })();
         }
 
         // ========================================
-        // TIER 3: BACKEND API (If configured)
+        // TIER 4: BACKEND API (If configured)
         // ========================================
         if (BACKEND_API_URL && BACKEND_API_URL.startsWith('http')) {
-            try {
-                await fetch(BACKEND_API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newSubmission)
-                });
-                console.log("✅ Sent to Backend API");
-            } catch (error) {
-                console.error("❌ Backend API Error:", error);
-            }
+            (async () => {
+                try {
+                    await fetch(BACKEND_API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(newSubmission)
+                    });
+                    console.log("✅ Sent to Backend API");
+                } catch (error) {
+                    console.error("❌ Backend API Error:", error);
+                }
+            })();
         }
 
         return newSubmission;
