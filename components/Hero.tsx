@@ -83,7 +83,10 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onGroupRegister }) => {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/50 animate-bounce">
+      <div 
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/50 animate-bounce cursor-pointer hover:text-white transition-colors"
+        onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+      >
         <span className="material-icons-round text-3xl">keyboard_arrow_down</span>
       </div>
     </section>

@@ -24,9 +24,9 @@ export const Footer: React.FC<FooterProps> = ({ onPrivacyClick }) => {
             A community-led initiative to protect Olive Ridley Turtles and preserve our ocean's biodiversity.
           </p>
           <div className="flex gap-3">
-            <SocialLink href="#" icon={<Twitter size={18} />} color="hover:bg-blue-400" label="Twitter" />
-            <SocialLink href="#" icon={<Instagram size={18} />} color="hover:bg-pink-600" label="Instagram" />
-            <SocialLink href="#" icon={<Facebook size={18} />} color="hover:bg-blue-600" label="Facebook" />
+            <SocialLink href="https://twitter.com/" icon={<Twitter size={18} />} color="hover:bg-blue-400" label="Twitter" />
+            <SocialLink href="https://instagram.com/" icon={<Instagram size={18} />} color="hover:bg-pink-600" label="Instagram" />
+            <SocialLink href="https://facebook.com/" icon={<Facebook size={18} />} color="hover:bg-blue-600" label="Facebook" />
           </div>
         </div>
 
@@ -37,8 +37,8 @@ export const Footer: React.FC<FooterProps> = ({ onPrivacyClick }) => {
           </h3>
           <ul className="space-y-3 text-sm">
             {/* <li><a href="#" className="hover:text-primary transition-colors flex items-center gap-2">About the Mission</a></li> */}
-            <li><a href="#" className="hover:text-primary transition-colors flex items-center gap-2">Turtle Walks</a></li>
-            <li><a href="#" className="hover:text-primary transition-colors flex items-center gap-2">Gallery</a></li>
+            <li><a href="#events" className="hover:text-primary transition-colors flex items-center gap-2">Turtle Walks</a></li>
+            <li><a href="#gallery" className="hover:text-primary transition-colors flex items-center gap-2">Gallery</a></li>
           </ul>
         </div>
 

@@ -42,10 +42,15 @@ export const AboutSection: React.FC = () => {
               </p>
             </div>
             
-            <button className="mt-10 px-8 py-4 bg-midnight dark:bg-white text-white dark:text-midnight font-bold rounded-full hover:bg-midnight-light dark:hover:bg-slate-100 transition-all transform hover:scale-105 shadow-xl flex items-center gap-3">
+            <a 
+              href="https://en.wikipedia.org/wiki/Olive_ridley_sea_turtle"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-10 px-8 py-4 bg-midnight dark:bg-white text-white dark:text-midnight font-bold rounded-full hover:bg-midnight-light dark:hover:bg-slate-100 transition-all transform hover:scale-105 shadow-xl flex items-center gap-3 w-fit"
+            >
               Read Our Full Story
               <span className="material-icons-round">arrow_forward</span>
-            </button>
+            </a>
           </div>
         </div>
       </div>

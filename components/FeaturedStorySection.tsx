@@ -33,13 +33,23 @@ export const FeaturedStorySection: React.FC = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="px-8 py-4 bg-secondary text-midnight font-bold rounded-2xl hover:bg-teal-300 transition-all flex items-center justify-center gap-2">
+                <a 
+                  href="https://en.wikipedia.org/wiki/Olive_ridley_sea_turtle#Conservation"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 bg-secondary text-midnight font-bold rounded-2xl hover:bg-teal-300 transition-all flex items-center justify-center gap-2"
+                >
                   View Full Report
                   <span className="material-icons-round">assessment</span>
-                </button>
-                <button className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold rounded-2xl hover:bg-white/20 transition-all">
+                </a>
+                <a 
+                  href="https://www.youtube.com/results?search_query=olive+ridley+hatchlings+chennai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold rounded-2xl hover:bg-white/20 transition-all flex items-center justify-center"
+                >
                   Watch Highlights
-                </button>
+                </a>
               </div>
             </div>
           </div>

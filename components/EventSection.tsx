@@ -30,7 +30,11 @@ const events = [
   }
 ];
 
-export const EventSection: React.FC = () => {
+interface EventSectionProps {
+  onJoin?: () => void;
+}
+
+export const EventSection: React.FC<EventSectionProps> = ({ onJoin }) => {
   return (
     <section className="py-24 bg-midnight text-white relative overflow-hidden" id="events">
       {/* Background decoration */}
@@ -45,8 +49,11 @@ export const EventSection: React.FC = () => {
               Join us on the ground. Whether it's a night walk or a morning cleanup, your presence makes a difference.
             </p>
           </div>
-          <button className="px-6 py-3 border border-white/20 rounded-full font-bold hover:bg-white hover:text-midnight transition-colors">
-            View All Events
+          <button 
+            onClick={onJoin}
+            className="px-6 py-3 border border-white/20 rounded-full font-bold hover:bg-white hover:text-midnight transition-colors"
+          >
+            Join Our Next Walk
           </button>
         </div>
 
@@ -81,10 +88,13 @@ export const EventSection: React.FC = () => {
               </div>
               
               <div className="mt-6 pt-6 border-t border-white/10 flex justify-end">
-                <span className="text-sm font-bold uppercase tracking-wider flex items-center gap-2 group-hover:gap-3 transition-all">
+                <button 
+                  onClick={onJoin}
+                  className="text-sm font-bold uppercase tracking-wider flex items-center gap-2 group-hover:gap-3 transition-all hover:text-primary"
+                >
                   Register
                   <span className="material-icons-round text-sm">arrow_forward</span>
-                </span>
+                </button>
               </div>
             </div>
           ))}

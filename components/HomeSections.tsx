@@ -27,7 +27,7 @@ export const HomeSections: React.FC<HomeSectionsProps> = ({ onJoin, onInitiative
       
       <FeaturedStorySection />
 
-      <EventSection />
+      <EventSection onJoin={onJoin} />
 
       <BlogSection />
 
