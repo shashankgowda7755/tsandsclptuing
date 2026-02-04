@@ -42,6 +42,9 @@ export const UserForm: React.FC<UserFormProps> = ({ userData, setUserData, onBac
     return parts.slice(1).join(' ');
   });
 
+  // Honeypot state for bot protection
+  const [honeyPot, setHoneyPot] = useState('');
+
   // Sync effect: Update userData whenever firstName or lastName changes
   useEffect(() => {
     const full = `${firstName} ${lastName}`.trim();
@@ -186,6 +189,9 @@ export const UserForm: React.FC<UserFormProps> = ({ userData, setUserData, onBac
   const isFormValid = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^[0-9]{10,12}$/;
+
+    // If honeypot is filled, form is effectively invalid (for bots)
+    if (honeyPot !== '') return false;
 
     return (
       firstName.trim().length > 0 && // First Name Mandatory
@@ -341,6 +347,18 @@ export const UserForm: React.FC<UserFormProps> = ({ userData, setUserData, onBac
 
               {/* Grid for Contact Info */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                {/* BOT TRAP (Hidden Field) */}
+                <div className="hidden">
+                   <label>Website</label>
+                   <input
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={honeyPot}
+                      onChange={(e) => setHoneyPot(e.target.value)}
+                   />
+                </div>
 
                 {/* WhatsApp */}
                 <div>

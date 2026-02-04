@@ -1,8 +1,8 @@
 -- ==============================================================================
--- RUN THIS IN SUPABASE SQL EDITOR
+-- RUN THIS IN SUPABASE SQL EDITOR (SECURITY HARDENED V2)
 -- ==============================================================================
 
--- 1. Create the table matching the JS 'Submission' object keys (camelCase quoted)
+-- 1. Create the table (if it doesn't exist)
 create table if not exists public.submissions (
   "id" uuid not null primary key,
   "schoolId" text,
@@ -19,21 +19,42 @@ create table if not exists public.submissions (
   "insertedAt" timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
--- 2. Enable Row Level Security (RLS) - Crucial for security
+-- 2. Enable Row Level Security (RLS)
 alter table public.submissions enable row level security;
 
--- 3. Create Policy: Allow anyone (anon) to INSERT data
+-- 3. DROP INSECURE POLICIES (Clean slate)
+drop policy if exists "Enable insert for anon" on public.submissions;
+drop policy if exists "Enable update for anon" on public.submissions;
+drop policy if exists "Enable read for anon" on public.submissions;
+
+-- 4. CREATE SECURE POLICIES
+
+-- Policy A: Allow Insert (Write-Only)
+-- Anonymous users can create new records, but cannot see or edit existing ones.
 create policy "Enable insert for anon"
 on public.submissions for insert
 with check (true);
 
--- 4. Create Policy: Allow anyone (anon) to UPDATE data (e.g. for marking 'posterDownloaded')
--- Note: In high-security apps, you'd restrict this, but for this public campaign it is standard.
-create policy "Enable update for anon"
-on public.submissions for update
-using (true);
+-- Policy B: Block Select/Update/Delete
+-- (No policy created = Default Deny. This is what we want.)
 
--- Optional: If you want to view data in a dashboard app later
-create policy "Enable read for anon"
-on public.submissions for select
-using (true);
+-- 5. SECURE FUNCTION FOR UPDATES (RPC)
+-- Instead of giving UPDATE permission on the table, we create a specific function
+-- that allows *only* flipping the 'posterDownloaded' flag for a specific ID.
+
+create or replace function mark_downloaded(sub_id uuid)
+returns void
+language plpgsql
+security definer -- Runs with admin privileges
+as $$
+begin
+  update public.submissions
+  set "posterDownloaded" = true
+  where id = sub_id;
+end;
+$$;
+
+-- Grant permission to anonymous users to call this specific function
+grant execute on function mark_downloaded(uuid) to anon;
+grant execute on function mark_downloaded(uuid) to authenticated;
+grant execute on function mark_downloaded(uuid) to service_role;
