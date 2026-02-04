@@ -8,12 +8,6 @@ const SERVICES = [
     color: "bg-blue-500"
   },
   {
-    title: "Nest Relocation",
-    desc: "Safely collect and relocate eggs to protected hatcheries where they can incubate away from predators and human interference.",
-    icon: "egg",
-    color: "bg-emerald-500"
-  },
-  {
     title: "Hatchling Release",
     desc: "Experience the magic of watching thousands of tiny hatchlings make their first journey to the ocean at dawn.",
     icon: "waves",

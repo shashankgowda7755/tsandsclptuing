@@ -2,11 +2,9 @@ import React from 'react';
 import { MetricsSection } from './MetricsSection';
 import { GallerySection } from './GallerySection';
 import { InitiativesSection } from './InitiativesSection';
-import { AboutSection } from './AboutSection';
 import { WhatWeDoSection } from './WhatWeDoSection';
 import { GetInvolvedSection } from './GetInvolvedSection';
 import { FeaturedStorySection } from './FeaturedStorySection';
-import { BlogSection } from './BlogSection';
 import { EventSection } from './EventSection';
 
 interface HomeSectionsProps {
@@ -19,7 +17,6 @@ export const HomeSections: React.FC<HomeSectionsProps> = ({ onJoin, onInitiative
     <>
       <MetricsSection />
       
-      <AboutSection />
       
       <WhatWeDoSection />
       
@@ -28,8 +25,6 @@ export const HomeSections: React.FC<HomeSectionsProps> = ({ onJoin, onInitiative
       <FeaturedStorySection />
 
       <EventSection onJoin={onJoin} />
-
-      <BlogSection />
 
       <GallerySection />
 

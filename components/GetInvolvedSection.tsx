@@ -6,18 +6,6 @@ const OPPORTUNITIES = [
     desc: "Join our night patrol teams or help at the hatcheries. Perfect for individuals and small groups.",
     cta: "Sign Up to Volunteer",
     icon: "person_add"
-  },
-  {
-    role: "Partner",
-    desc: "Corporate and institutional partnerships for large-scale impact and CSR initiatives.",
-    cta: "Become a Partner",
-    icon: "handshake"
-  },
-  {
-    role: "Intern",
-    desc: "Gain hands-on experience in marine biology and conservation management through our 3-month program.",
-    cta: "Apply for Internship",
-    icon: "workspace_premium"
   }
 ];
 
