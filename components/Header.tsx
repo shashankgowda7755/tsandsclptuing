@@ -27,8 +27,7 @@ export const Header: React.FC<HeaderProps> = ({ onLogoClick, onJoin }) => {
             {/* <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#about">About Us</a> */}
             <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#events">Events</a>
             <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#gallery">Gallery</a>
-            {/* Keeping existing functional links if needed, but prioritizing user request */}
-            {/* <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#schedule">The Walk</a> */}
+
           </div>
 
           <div className="flex items-center gap-4">
