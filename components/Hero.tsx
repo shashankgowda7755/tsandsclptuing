@@ -56,12 +56,12 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onGroupRegister }) => {
             <span className="inline-block py-1 px-3 rounded-full bg-secondary/20 border border-secondary/50 text-secondary text-xs font-bold tracking-wider mb-6 uppercase animate-pulse">
                 Olive Ridley Conservation Season 2026
             </span>
-            <h1 className="font-display font-extrabold text-4xl md:text-5xl lg:text-7xl text-white mb-6 leading-tight drop-shadow-lg">
-                Collective Action for<br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-teal-200">Our Oceans.</span>
+            <h1 className="font-display font-extrabold text-5xl md:text-6xl lg:text-8xl text-white mb-6 leading-tight drop-shadow-2xl">
+                Saving Our<br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-teal-200">Sea Turtles.</span>
             </h1>
-            <p className={`text-base md:text-xl text-gray-200 mb-8 md:mb-10 max-w-2xl font-light leading-relaxed ${currentSlide.alignment === 'center' ? 'mx-auto' : ''}`}>
-                Join for Night Walks on Marina.
+            <p className={`text-lg md:text-2xl text-gray-100 mb-8 md:mb-12 max-w-2xl font-medium leading-relaxed drop-shadow-md ${currentSlide.alignment === 'center' ? 'mx-auto' : ''}`}>
+                Join Chennai's oldest community-led conservation effort. Patrolling Marina to Besant Nagar since 1988.
             </p>
             
             <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 ${currentSlide.alignment === 'center' ? 'justify-center' : 'justify-start'}`}>

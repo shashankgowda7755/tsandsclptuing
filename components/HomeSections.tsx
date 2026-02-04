@@ -2,6 +2,10 @@ import React from 'react';
 import { MetricsSection } from './MetricsSection';
 import { GallerySection } from './GallerySection';
 import { InitiativesSection } from './InitiativesSection';
+import { AboutSection } from './AboutSection';
+import { WhatWeDoSection } from './WhatWeDoSection';
+import { GetInvolvedSection } from './GetInvolvedSection';
+import { FeaturedStorySection } from './FeaturedStorySection';
 
 interface HomeSectionsProps {
   onJoin?: () => void;
@@ -11,28 +15,20 @@ interface HomeSectionsProps {
 export const HomeSections: React.FC<HomeSectionsProps> = ({ onJoin, onInitiativeClick }) => {
   return (
     <>
-      {/* Report Banner */}
-      <div className="bg-primary text-white relative z-20 shadow-lg border-b-4 border-red-800">
-        <div className="max-w-7xl mx-auto px-3 py-2 sm:px-6 sm:py-4 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
-          <div className="flex items-center gap-3 sm:gap-4">
-            <div>
-              <p className="font-bold text-sm sm:text-lg leading-tight">To participate in turtle walks</p>
-              <p className="text-[10px] sm:text-xs text-red-100 opacity-90 max-w-[250px] sm:max-w-none mx-auto sm:mx-0">Call us at 7305807017</p>
-            </div>
-          </div>
-          <a className="flex items-center gap-1.5 sm:gap-2 bg-white text-primary px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full font-bold text-xs sm:text-sm hover:bg-red-50 transition-colors shadow-sm" href="tel:+917305807017">
-            <span className="material-icons-round text-lg sm:text-xl">phone_in_talk</span>
-            7305807017
-          </a>
-        </div>
-      </div>
-
       <MetricsSection />
+      
+      <AboutSection />
+      
+      <WhatWeDoSection />
+      
+      <GetInvolvedSection onJoin={onJoin} />
+      
+      <FeaturedStorySection />
 
       <GallerySection />
 
       {/* Schedule Section */}
-      <section className="py-24 bg-white dark:bg-midnight-light relative" id="schedule">
+      <section className="py-24 bg-stone-50 dark:bg-midnight-light relative" id="schedule">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <span className="text-primary font-bold tracking-wider text-sm uppercase">Join the Journey</span>
@@ -116,37 +112,9 @@ export const HomeSections: React.FC<HomeSectionsProps> = ({ onJoin, onInitiative
                     <span className="material-icons-round text-sm">arrow_forward</span>
                   </button>
                 </div>
-                {/* More dates... simplified for brevity */}
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Community Section */}
-      <section className="py-20 bg-blue-50 dark:bg-slate-900 border-t border-blue-100 dark:border-white/5" id="community">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           {/* Copy structure from code.html for Community section */}
-           <div className="flex flex-col lg:flex-row gap-12 items-start">
-             <div className="lg:w-1/3 w-full">
-                <div className="bg-gradient-to-br from-midnight to-blue-900 rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
-                    <h3 className="font-display font-bold text-3xl mb-4 relative z-10">Bring Your Team</h3>
-                    <p className="text-blue-100 mb-8 relative z-10">Corporate teams, school groups, and college clubs make the biggest impact.</p>
-                    <button onClick={onJoin} className="w-full py-3 bg-secondary hover:bg-teal-400 text-midnight font-bold rounded-lg transition-colors relative z-10">Register Group</button>
-                </div>
-             </div>
-             {/* Partners Grid */}
-             <div className="lg:w-2/3 w-full">
-                <h3 className="font-display font-bold text-2xl text-midnight dark:text-white mb-4">Student &amp; Community Partners</h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {/* Simplified partner blocks */}
-                    <div className="bg-white dark:bg-surface-dark p-4 rounded-xl border border-gray-100 flex flex-col items-center justify-center text-center">
-                        <span className="font-bold text-sm text-midnight dark:text-white">Loyola Nature Club</span>
-                    </div>
-                    {/* Add more as needed */}
-                </div>
-             </div>
-           </div>
         </div>
       </section>
 

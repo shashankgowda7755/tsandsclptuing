@@ -1,158 +1,135 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
-const metricsData = [
-  {
-    tag: "Conservation Impact",
-    title: "Hatchlings Released",
-    value: "200k+",
-    unit: "turtles",
-    unitIcon: "pets",
-    desc: "Over three decades of protecting nests and safely releasing Olive Ridley hatchlings into the ocean.",
-    color: "text-primary",
-    unitColor: "text-primary",
-    bgIcon: "water_drop"
-  },
-  {
-    tag: "Our History",
-    title: "Years of Service",
-    value: "35+",
-    unit: "years",
-    unitIcon: "",
-    desc: "A consistent, community-led effort since 1988 to preserve Chennai's coastal biodiversity.",
-    color: "text-secondary",
-    unitColor: "text-secondary",
-    bgIcon: "history"
-  },
-  {
-    tag: "Daily Effort",
-    title: "Distance Patrolled",
-    value: "14",
-    unit: "km/night",
-    unitIcon: "",
-    desc: "Volunteers cover the stretch from Neelangarai to Besant Nagar every night during nesting season.",
-    color: "text-emerald-400",
-    unitColor: "text-emerald-500/80",
-    bgIcon: "map"
-  },
-  {
-    tag: "Community",
-    title: "Volunteers",
-    value: "10k+",
-    unit: "people",
-    unitIcon: "",
-    desc: "Students, working professionals, and families coming together to make a difference.",
-    color: "text-teal-400",
-    unitColor: "text-teal-500/80",
-    bgIcon: "diversity_3"
-  }
-];
-
-export const MetricsSection: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
+// Custom Hook for Count Up Animation
+const useCountUp = (end: number, duration: number = 2000, start: boolean = false) => {
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIsAnimating(true);
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % metricsData.length);
-        setIsAnimating(false);
-      }, 300); // Wait for fade out
-    }, 3000);
+    if (!start) return;
+    
+    let startTime: number | null = null;
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      setCount(Math.floor(progress * end));
+      
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    
+    window.requestAnimationFrame(step);
+  }, [end, duration, start]);
 
-    return () => clearInterval(interval);
-  }, []);
+  return count;
+};
 
-  const mainData = metricsData[currentIndex];
+// Custom Hook for Intersection Observer (View Detection)
+const useInView = (options?: IntersectionObserverInit) => {
+  const [isInView, setIsInView] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsInView(true);
+        observer.disconnect(); // Trigger only once
+      }
+    }, options);
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) observer.unobserve(ref.current);
+    };
+  }, [options]);
+
+  return { ref, isInView };
+};
+
+export const MetricsSection: React.FC = () => {
+  const { ref, isInView } = useInView({ threshold: 0.2 });
   
-  // Get next 3 items
-  const nextItems = [1, 2, 3].map(offset => metricsData[(currentIndex + offset) % metricsData.length]);
+  // Staggered counters
+  const yearsCount = useCountUp(35, 2000, isInView);
+  const volunteersCount = useCountUp(10000, 2500, isInView); // treating 10k as 10000 for calc
+  const hatchlingsCount = useCountUp(200000, 3000, isInView);
+  const distanceCount = useCountUp(14, 1500, isInView);
 
   return (
-    <section className="bg-slate-900 py-20 px-4 flex items-center justify-center" id="impact">
-      <div className="max-w-7xl w-full mx-auto relative">
-        <div className="bg-slate-900 rounded-[2rem] shadow-2xl overflow-hidden border border-slate-700/50">
-          <div className="grid grid-cols-1 lg:grid-cols-2">
-            {/* Left Side: Main Feature */}
-            <div className="relative p-6 md:p-12 lg:p-16 flex flex-col justify-center min-h-[400px] lg:min-h-[500px]">
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 opacity-90"></div>
-              {/* Pattern overlay simulated with CSS radial/linear gradients or just skipped if image not avail. 
-                  Using simple dots pattern fallback or empty div */}
-              <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay" 
-                   style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
-
-              {/* Dynamic Main Content */}
-              <div 
-                className={`relative z-10 transition-all duration-300 ease-in-out ${isAnimating ? 'opacity-0 translate-y-2 scale-95' : 'opacity-100 translate-y-0 scale-100'}`}
-              >
-                <span className="text-secondary font-bold tracking-widest uppercase text-xs md:text-sm mb-4 block">
-                  {mainData.tag}
-                </span>
-                <h3 className="text-2xl md:text-4xl font-medium text-white mb-8">
-                  {mainData.title}
-                </h3>
-                <div className="flex items-baseline gap-4 mb-8">
-                  <span className="font-display text-5xl md:text-8xl font-bold text-white tracking-tight">
-                    {mainData.value}
-                  </span>
-                  {mainData.unitIcon ? (
-                     <span className={`material-icons-round text-3xl md:text-6xl transform translate-y-2 ${mainData.unitColor}`}>
-                       {mainData.unitIcon}
-                     </span>
-                  ) : (
-                     <span className={`text-3xl md:text-5xl font-bold ml-2 ${mainData.unitColor}`}>
-                       {mainData.unit}
-                     </span>
-                  )}
-                </div>
-                <p className="text-lg text-slate-400 mb-10 max-w-md leading-relaxed">
-                  {mainData.desc}
-                </p>
-                <button className="inline-flex items-center justify-center bg-white text-slate-900 px-6 py-3 rounded-full font-bold text-lg hover:bg-slate-200 transition-colors duration-300 w-fit group">
-                  Become a Volunteer
-                  <span className="material-icons-round ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Right Side: List */}
-            <div className="relative p-6 md:p-12 lg:p-16 flex items-center bg-slate-800/50 border-t lg:border-t-0 lg:border-l border-slate-700/50 min-h-[400px] lg:min-h-[500px]">
-               <div className="absolute inset-0 opacity-5 pointer-events-none"
-                    style={{ backgroundImage: 'radial-gradient(square, #ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
-              
-              <div className="relative w-full backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-6 lg:p-10 shadow-xl overflow-hidden">
-                <div className="absolute top-0 right-0 p-6 opacity-20 pointer-events-none">
-                  <span className="material-icons-round text-8xl text-primary rotate-12 transition-all duration-700">
-                    {mainData.bgIcon}
-                  </span>
-                </div>
-                
-                {/* Dynamic List Content */}
-                <div className="relative z-10 space-y-10">
-                  {nextItems.map((item, idx) => (
-                    <React.Fragment key={idx}>
-                        <div className="flex items-center justify-between group cursor-default transition-all duration-300 hover:translate-x-1">
-                            <div>
-                                <p className="text-slate-400 text-xs md:text-sm font-medium uppercase tracking-wider mb-1">{item.tag}</p>
-                                <h4 className="text-lg md:text-2xl font-semibold text-white">{item.title}</h4>
-                            </div>
-                            <div className="text-right">
-                                <div className="flex items-baseline justify-end gap-1">
-                                    <span className={`block font-display text-3xl md:text-5xl ${item.color} font-bold transform transition-transform group-hover:scale-105 origin-right`}>{item.value}</span>
-                                    {item.unit && <span className={`text-base md:text-xl ${item.unitColor} font-medium`}>{item.unit}</span>}
-                                </div>
-                            </div>
-                        </div>
-                        {idx < 2 && (
-                            <div className="h-px w-full bg-gradient-to-r from-transparent via-slate-600/50 to-transparent"></div>
-                        )}
-                    </React.Fragment>
-                  ))}
-                </div>
-              </div>
-            </div>
+    <section ref={ref} className="bg-[#0B1221] py-20 px-4 md:px-8 lg:px-16 text-white min-h-[600px] flex items-center justify-center font-sans border-t border-white/5" id="impact">
+      <div className={`max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center transition-all duration-1000 transform ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        
+        {/* Left Content */}
+        <div>
+          <span className="text-orange-500 font-bold tracking-widest text-sm uppercase mb-4 block animate-pulse">Restored</span>
+          <h2 className="text-4xl md:text-5xl font-medium text-slate-200 mb-8">Coastal Conservation</h2>
+          
+          <div className="flex items-baseline gap-3 mb-6">
+            <span className="font-display font-bold text-7xl md:text-8xl text-white tabular-nums">
+              {yearsCount}
+            </span>
+            <span className="text-3xl md:text-4xl font-bold text-emerald-500">years</span>
           </div>
+
+          <p className="text-slate-400 text-lg leading-relaxed mb-10 max-w-md">
+            Over three decades of persistent dedication to restoring the natural beauty of our shores and protecting the Olive Ridley turtle.
+          </p>
+
+          <button className="bg-slate-200 text-slate-900 px-8 py-4 rounded-full font-bold text-sm md:text-base flex items-center gap-2 hover:bg-white transition-colors">
+            Become a Volunteer
+            <span className="material-icons-round text-lg">arrow_forward</span>
+          </button>
         </div>
+
+        {/* Right Stats Card */}
+        <div className="bg-[#151F32] rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden border border-white/5 shadow-2xl">
+           <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
+             <span className="material-icons-round text-9xl text-white">volunteer_activism</span>
+           </div>
+
+           <div className="space-y-12 relative z-10">
+             
+             {/* Stat 1 */}
+             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/5 pb-8 transition-opacity duration-700 delay-300" style={{ opacity: isInView ? 1 : 0 }}>
+               <div>
+                 <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Our Community</p>
+                 <h3 className="text-xl md:text-2xl font-bold text-white">Volunteers Mobilized</h3>
+               </div>
+               <div className="text-left sm:text-right">
+                 <span className="text-4xl md:text-5xl font-display font-bold text-[#3B82F6] tabular-nums">{(volunteersCount / 1000).toFixed(0)}k</span>
+                 <span className="text-[#3B82F6] text-xl font-bold ml-1">people</span>
+               </div>
+             </div>
+
+             {/* Stat 2 */}
+             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/5 pb-8 transition-opacity duration-700 delay-500" style={{ opacity: isInView ? 1 : 0 }}>
+               <div>
+                 <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Global Impact</p>
+                 <h3 className="text-xl md:text-2xl font-bold text-white">Hatchlings Released</h3>
+               </div>
+               <div className="text-left sm:text-right">
+                 <span className="text-4xl md:text-5xl font-display font-bold text-[#3B82F6] tabular-nums">{(hatchlingsCount / 1000).toFixed(0)}k+</span>
+               </div>
+             </div>
+
+             {/* Stat 3 */}
+             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-opacity duration-700 delay-700" style={{ opacity: isInView ? 1 : 0 }}>
+               <div>
+                 <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Patrolled</p>
+                 <h3 className="text-xl md:text-2xl font-bold text-white">Distance Covered</h3>
+               </div>
+               <div className="text-left sm:text-right">
+                 <span className="text-4xl md:text-5xl font-display font-bold text-emerald-500 tabular-nums">{distanceCount}</span>
+                 <span className="text-emerald-500 text-xl font-bold ml-1">km/night</span>
+               </div>
+             </div>
+
+           </div>
+        </div>
+
       </div>
     </section>
   );
