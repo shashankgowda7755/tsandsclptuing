@@ -22,12 +22,14 @@ export const Header: React.FC<HeaderProps> = ({ onLogoClick, onJoin }) => {
             </div>
           </div>
           
-          {/* Desktop Navigation */}
+            {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8 items-center">
-            {/* <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#">About</a> */}
-            <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#impact">Impact</a>
-            <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#schedule">The Walk</a>
-            <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#community">Community</a>
+            <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#about">About Us</a>
+            <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#events">Events</a>
+            <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#gallery">Gallery</a>
+            <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#blogs">Blogs</a>
+            {/* Keeping existing functional links if needed, but prioritizing user request */}
+            {/* <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#schedule">The Walk</a> */}
           </div>
 
           <div className="flex items-center gap-4">
@@ -56,10 +58,10 @@ export const Header: React.FC<HeaderProps> = ({ onLogoClick, onJoin }) => {
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-20 left-0 w-full bg-white dark:bg-midnight border-b border-gray-100 dark:border-white/10 shadow-lg animate-fade-in">
           <div className="px-4 pt-2 pb-6 space-y-2">
-            {/* <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-white hover:text-primary hover:bg-gray-50 dark:hover:bg-white/5" href="#">About</a> */}
-            <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-white hover:text-primary hover:bg-gray-50 dark:hover:bg-white/5" href="#impact">Impact</a>
-            <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-white hover:text-primary hover:bg-gray-50 dark:hover:bg-white/5" href="#schedule">The Walk</a>
-            <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-white hover:text-primary hover:bg-gray-50 dark:hover:bg-white/5" href="#community">Community</a>
+            <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-white hover:text-primary hover:bg-gray-50 dark:hover:bg-white/5" href="#about">About Us</a>
+            <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-white hover:text-primary hover:bg-gray-50 dark:hover:bg-white/5" href="#events">Events</a>
+            <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-white hover:text-primary hover:bg-gray-50 dark:hover:bg-white/5" href="#gallery">Gallery</a>
+            <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-white hover:text-primary hover:bg-gray-50 dark:hover:bg-white/5" href="#blogs">Blogs</a>
             <button 
                 onClick={() => {
                     setIsMobileMenuOpen(false);

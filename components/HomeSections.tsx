@@ -6,6 +6,8 @@ import { AboutSection } from './AboutSection';
 import { WhatWeDoSection } from './WhatWeDoSection';
 import { GetInvolvedSection } from './GetInvolvedSection';
 import { FeaturedStorySection } from './FeaturedStorySection';
+import { BlogSection } from './BlogSection';
+import { EventSection } from './EventSection';
 
 interface HomeSectionsProps {
   onJoin?: () => void;
@@ -24,6 +26,10 @@ export const HomeSections: React.FC<HomeSectionsProps> = ({ onJoin, onInitiative
       <GetInvolvedSection onJoin={onJoin} />
       
       <FeaturedStorySection />
+
+      <EventSection />
+
+      <BlogSection />
 
       <GallerySection />
 
