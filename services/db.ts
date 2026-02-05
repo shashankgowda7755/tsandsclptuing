@@ -1,11 +1,6 @@
 import { School, Submission, StudentData } from '../types';
-
-// ==========================================
-// CONFIGURATION
-// ==========================================
-
-const GOOGLE_SCRIPT_URL: string = "https://script.google.com/macros/s/AKfycbyrJiblH9WqPP2vIjTvM2yyW_kWvvEPUAK7wCptArPQNlc7XqclOgLWB09UcRxaGRmb/exec";
-const BACKEND_API_URL: string = "";
+import { enqueueSubmission } from './submissionQueue';
+import { supabase } from './supabaseClient';
 
 // ==========================================
 // CENTRAL SCHOOL CONFIGURATION
@@ -395,43 +390,10 @@ export const DB = {
         }
 
         // ========================================
-        // TIER 2: GOOGLE SHEETS (If configured)
+        // TIER 2: SUPABASE QUEUE (Primary High-Load Strategy)
         // ========================================
-        if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.startsWith('http')) {
-            try {
-                // Add Auth Token for Security
-                const payload = {
-                    ...newSubmission,
-                    auth_token: import.meta.env.VITE_API_TOKEN || ''
-                };
-
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // Required for Google Apps Script
-                    headers: { 'Content-Type': 'text/plain' }, // Using text/plain ensures e.postData.contents is populated without CORS preflight issues
-                    body: JSON.stringify(payload)
-                });
-                console.log("✅ Sent to Google Sheets");
-            } catch (error) {
-                console.error("❌ Google Script Error:", error);
-            }
-        }
-
-        // ========================================
-        // TIER 3: BACKEND API (If configured)
-        // ========================================
-        if (BACKEND_API_URL && BACKEND_API_URL.startsWith('http')) {
-            try {
-                await fetch(BACKEND_API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newSubmission)
-                });
-                console.log("✅ Sent to Backend API");
-            } catch (error) {
-                console.error("❌ Backend API Error:", error);
-            }
-        }
+        // This is non-blocking and highly reliable for 1000+ users
+        enqueueSubmission(newSubmission);
 
         return newSubmission;
     },
@@ -445,12 +407,25 @@ export const DB = {
         return stored ? JSON.parse(stored) : [];
     },
 
-    logDownload: (submissionId: string) => {
+    logDownload: async (submissionId: string) => {
+        // Update Local Storage
         const submissions = DB.getSubmissions();
         const index = submissions.findIndex(s => s.id === submissionId);
         if (index !== -1) {
             submissions[index].posterDownloaded = true;
             localStorage.setItem(STORAGE_KEYS.SUBMISSIONS, JSON.stringify(submissions));
+        }
+
+        // Update Supabase using Secure RPC
+        // This prevents giving direct UPDATE access to the table
+        if (supabase) {
+            try {
+                const { error } = await supabase.rpc('mark_downloaded', { sub_id: submissionId });
+                if (error) console.error("RPC Error:", error);
+                else console.log("✅ Marked downloaded via RPC");
+            } catch (e) {
+                console.error("Failed to mark download:", e);
+            }
         }
     },
 

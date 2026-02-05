@@ -11,9 +11,17 @@ export const GroupRegistrationForm: React.FC<GroupRegistrationFormProps> = ({ on
     phone: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [honeyPot, setHoneyPot] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Bot check
+    if (honeyPot) {
+      console.log('Bot detected');
+      return;
+    }
+
     // In a real app, send data to backend here
     console.log('Group Registration:', formData);
     setIsSubmitted(true);
@@ -58,6 +66,12 @@ export const GroupRegistrationForm: React.FC<GroupRegistrationFormProps> = ({ on
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
+
+          {/* Honeypot Field */}
+          <div className="hidden">
+             <input type="text" value={honeyPot} onChange={(e) => setHoneyPot(e.target.value)} tabIndex={-1} autoComplete="off"/>
+          </div>
+
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">Group / Contact Name</label>
             <input
