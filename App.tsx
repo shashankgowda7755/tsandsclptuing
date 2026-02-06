@@ -3,7 +3,7 @@ import { AppProvider } from './context/AppContext';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 
-import { Footer } from './components/Footer';
+
 import { UserForm } from './components/UserForm';
 import { GroupRegistrationForm } from './components/GroupRegistrationForm';
 import { CertificatePreview } from './components/CertificatePreview';
@@ -115,7 +115,7 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-canvas font-sans text-body flex flex-col">
       <Header 
         onLogoClick={handleReset} 
-        onJoin={() => goToStep(Step.GroupRegistration)} 
+        onDownload={handleStart} 
         onSecretDebug={() => goToStep(Step.Debug)}
       />
 
@@ -182,7 +182,7 @@ const App: React.FC = () => {
         )}
       </main>
 
-      {currentStep !== Step.InitiativeDetails && <Footer onPrivacyClick={() => setShowPrivacyPolicy(true)} />}
+
 
       {/* Privacy Policy Modal */}
       {showPrivacyPolicy && (

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 interface HeaderProps {
   onLogoClick: () => void;
-  onJoin?: () => void;
+  onDownload?: () => void;
   onSecretDebug?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onLogoClick, onJoin, onSecretDebug }) => {
+export const Header: React.FC<HeaderProps> = ({ onLogoClick, onDownload, onSecretDebug }) => {
   const [clickCount, setClickCount] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -40,27 +40,23 @@ export const Header: React.FC<HeaderProps> = ({ onLogoClick, onJoin, onSecretDeb
             className="flex-shrink-0 flex items-center gap-2 cursor-pointer"
             onClick={onLogoClick}
           >
-             <img src="/assets/turtle_hero.png" alt="Turtle Logo" className="h-10 w-auto object-contain mix-blend-multiply dark:mix-blend-screen" />
             <div>
-              <h1 className="font-display font-bold text-xl tracking-tight text-midnight dark:text-white leading-none">SAVE A TURTLE</h1>
+              <h1 className="font-display font-bold text-xl tracking-tight text-midnight dark:text-white leading-none">Sand Sculpting Contest</h1>
             </div>
           </div>
           
             {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8 items-center">
-            {/* <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#about">About Us</a> */}
-            <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#events">Events</a>
-            <a className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary transition-colors" href="#gallery">Gallery</a>
-
+            {/* Links removed as per request */}
           </div>
 
           <div className="flex items-center gap-4">
-             {/* Desktop Donate Button */}
+             {/* Desktop Download Button */}
              <button 
-                onClick={onJoin}
+                onClick={onDownload}
                 className="hidden md:inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-bold rounded-full shadow-sm text-white bg-primary hover:bg-primary-hover transition-all transform hover:-translate-y-0.5"
              >
-                Join Us
+                Download Certificate
             </button>
 
             {/* Mobile Menu Button */}
@@ -80,17 +76,14 @@ export const Header: React.FC<HeaderProps> = ({ onLogoClick, onJoin, onSecretDeb
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-20 left-0 w-full bg-white dark:bg-midnight border-b border-gray-100 dark:border-white/10 shadow-lg animate-fade-in">
           <div className="px-4 pt-2 pb-6 space-y-2">
-            {/* <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-white hover:text-primary hover:bg-gray-50 dark:hover:bg-white/5" href="#about">About Us</a> */}
-            <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-white hover:text-primary hover:bg-gray-50 dark:hover:bg-white/5" href="#events">Events</a>
-            <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-white hover:text-primary hover:bg-gray-50 dark:hover:bg-white/5" href="#gallery">Gallery</a>
             <button 
                 onClick={() => {
                     setIsMobileMenuOpen(false);
-                    if (onJoin) onJoin();
+                    if (onDownload) onDownload();
                 }}
                 className="w-full mt-4 flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-full shadow-sm text-white bg-primary hover:bg-primary-hover transition-all"
             >
-                Join Us
+                Download Certificate
             </button>
           </div>
         </div>

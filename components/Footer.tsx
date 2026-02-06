@@ -23,57 +23,9 @@ export const Footer: React.FC<FooterProps> = ({ onPrivacyClick }) => {
           <p className="text-sm leading-relaxed text-stone-400 mb-6">
             A community-led initiative to protect Olive Ridley Turtles and preserve our ocean's biodiversity.
           </p>
-          <div className="flex gap-3">
-            <SocialLink href="https://twitter.com/" icon={<Twitter size={18} />} color="hover:bg-blue-400" label="Twitter" />
-            <SocialLink href="https://instagram.com/" icon={<Instagram size={18} />} color="hover:bg-pink-600" label="Instagram" />
-            <SocialLink href="https://facebook.com/" icon={<Facebook size={18} />} color="hover:bg-blue-600" label="Facebook" />
-          </div>
         </div>
 
-        {/* Quick Links */}
-        <div>
-          <h3 className="font-bold text-stone-100 mb-6 uppercase text-xs tracking-wider flex items-center gap-2">
-            <span className="w-8 h-px bg-teal-500"></span> Navigation
-          </h3>
-          <ul className="space-y-3 text-sm">
-            {/* <li><a href="#" className="hover:text-primary transition-colors flex items-center gap-2">About the Mission</a></li> */}
-            <li><a href="#events" className="hover:text-primary transition-colors flex items-center gap-2">Turtle Walks</a></li>
-            <li><a href="#gallery" className="hover:text-primary transition-colors flex items-center gap-2">Gallery</a></li>
-          </ul>
-        </div>
 
-        {/* Legal */}
-        <div>
-          <h3 className="font-bold text-stone-100 mb-6 uppercase text-xs tracking-wider flex items-center gap-2">
-            <span className="w-8 h-px bg-white"></span> Legal
-          </h3>
-          <ul className="space-y-3 text-sm">
-            <li>
-              <button
-                onClick={onPrivacyClick}
-                className="hover:text-primary transition-colors text-left"
-              >
-                Privacy Policy
-              </button>
-            </li>
-          </ul>
-        </div>
-
-        {/* Contact */}
-        <div>
-          <h3 className="font-bold text-stone-100 mb-6 uppercase text-xs tracking-wider flex items-center gap-2">
-            <span className="w-8 h-px bg-blue-500"></span> Contact
-          </h3>
-          <ul className="space-y-4 text-sm">
-            <li className="flex items-start gap-3">
-              <MapPin size={18} className="text-stone-500 mt-0.5 shrink-0" />
-              <span>
-                Chennai, Tamil Nadu<br />
-                India
-              </span>
-            </li>
-          </ul>
-        </div>
 
       </div>
 
