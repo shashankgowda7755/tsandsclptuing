@@ -92,7 +92,7 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
       // 2. Add Background Image (with cache busting)
       const bgImg = new Image();
       bgImg.crossOrigin = 'anonymous';
-      bgImg.src = '/assets/new.png'; // Force refresh
+      bgImg.src = '/assets/poster.jpeg'; // Force refresh
       await new Promise<void>((resolve, reject) => {setTimeout(resolve, 100);});
 
       // D. Render the Clone to an Image using html2canvas
