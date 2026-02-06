@@ -36,7 +36,7 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
 
       // Async submission
       DB.submitForm(studentData)
-        .then(() => console.log("✅ Data submitted to Google Sheets"))
+        .then(() => console.log("✅ Data submitted successfully"))
         .catch(e => console.error("❌ Submission error:", e));
     }
   }, []); // Run once on mount
@@ -89,11 +89,23 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
 
       document.body.appendChild(clone);
 
-      // 2. Add Background Image (with cache busting)
-      const bgImg = new Image();
-      bgImg.crossOrigin = 'anonymous';
-      bgImg.src = '/assets/finalposter.png'; // Force refresh
-      await new Promise<void>((resolve, reject) => {setTimeout(resolve, 100);});
+      // 2. Ensure Background Image is Loaded (Critical for html2canvas)
+      const bgImg = clone.querySelector('img[alt="Background"]') as HTMLImageElement;
+      if (bgImg) {
+        // Ensure crossOrigin is set on the clone if not already
+        if (!bgImg.crossOrigin) bgImg.crossOrigin = 'anonymous';
+
+        if (!bgImg.complete) {
+           await new Promise((resolve) => {
+               bgImg.onload = resolve;
+               bgImg.onerror = resolve;
+               // Safety timeout to prevent hanging
+               setTimeout(resolve, 3000);
+           });
+        }
+      }
+      // Give a tiny buffer for layout to settle
+      await new Promise(r => setTimeout(r, 100));
 
       // D. Render the Clone to an Image using html2canvas
       const canvas = await (window as any).html2canvas(clone, {
@@ -135,7 +147,9 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `Turtle_Pledge_${userData.fullName.replace(/\s+/g, '_')}.png`; // Updated filename
+      // Sanitize filename: Alphanumeric only, replace others with underscore
+      const cleanName = userData.fullName.replace(/[^a-zA-Z0-9]/g, '_');
+      link.download = `Turtle_Pledge_${cleanName}.png`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

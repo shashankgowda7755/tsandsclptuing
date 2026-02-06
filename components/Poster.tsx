@@ -24,13 +24,12 @@ export const Poster: React.FC<PosterProps> = ({ id, userData, school, className 
       className={`relative aspect-[1455/2000] bg-white overflow-hidden text-gray-900 mx-auto shadow-sm ${className}`}
       style={{ containerType: 'inline-size' }}
     >
-      {console.log('🖼️ Poster Rendered:', { userData, photo: userData.photo ? 'Present' : 'Missing' })}
-
       {/* Layer 1: Background Image */}
       <img
         src="/assets/finalposter.png"
         className="absolute inset-0 w-full h-full object-cover"
         alt="Background"
+        crossOrigin="anonymous"
       />
 
       {/* Layer 2: Dynamic User Photo */}
