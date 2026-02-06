@@ -4,8 +4,8 @@ import { supabase } from '../services/supabaseClient';
 
 const QUEUE_KEY = 'offline_submission_queue';
 
-// Google Apps Script URL from env
-const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+// Google Apps Script URL (Hardcoded as requested for direct deployment)
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxqVLqizc9FiKoXzgtVhuDi2y_OAhZPC80dK_H4SNHLscJjms4KSLYDNdSDpB2ypzkt/exec";
 
 export const Debug: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const [queue, setQueue] = useState<any[]>([]);

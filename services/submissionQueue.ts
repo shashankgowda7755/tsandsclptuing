@@ -51,19 +51,15 @@ let isSyncing = false;
  * Attempts to send queued submissions to Supabase.
  * Removes them from the queue only upon successful confirmation.
  */
-// Google Apps Script URL from env
-const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+// Google Apps Script URL (Hardcoded as requested for direct deployment)
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxqVLqizc9FiKoXzgtVhuDi2y_OAhZPC80dK_H4SNHLscJjms4KSLYDNdSDpB2ypzkt/exec";
 
-/**
- * Attempts to send queued submissions to Google Sheets via Apps Script.
- * Removes them from the queue only upon successful confirmation.
- */
-export const processQueue = async () => {
-  if (isSyncing) return;
+/* 
   if (!GOOGLE_SCRIPT_URL) {
       console.warn("⚠️ VITE_GOOGLE_SCRIPT_URL not set in .env");
       return;
   }
+*/
 
   // 1. Snapshot the queue at the start of the process
   const batchToSync = getQueue();
