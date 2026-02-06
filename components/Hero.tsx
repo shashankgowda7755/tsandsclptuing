@@ -30,11 +30,8 @@ export const Hero: React.FC<HeroProps> = ({ onStart }) => {
         </div>
 
         {/* Main Title */}
-        <h1 className="font-display font-bold text-5xl sm:text-7xl md:text-8xl text-midnight mb-2 tracking-tight leading-none uppercase drop-shadow-sm">
-            SAND SCULPTING
-        </h1>
-        <h1 className="font-display font-bold text-5xl sm:text-7xl md:text-8xl text-teal-700 mb-6 tracking-tight leading-none uppercase drop-shadow-sm">
-            CONTEST
+        <h1 className="font-display font-bold text-3xl sm:text-5xl md:text-7xl lg:text-8xl text-black mb-6 tracking-tight leading-none uppercase drop-shadow-sm whitespace-normal sm:whitespace-nowrap">
+            SAND SCULPTING CONTEST
         </h1>
 
         {/* Subtitle */}
@@ -48,9 +45,9 @@ export const Hero: React.FC<HeroProps> = ({ onStart }) => {
         {/* CTA Button */}
         <button 
             onClick={onStart}
-            className="inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-lg text-white bg-primary hover:bg-primary-hover shadow-lg shadow-primary/30 transition-all transform hover:scale-105"
+            className="inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-full text-white bg-[#FF7F50] hover:bg-[#FF6347] shadow-lg shadow-orange-500/30 transition-all transform hover:scale-105"
         >
-            Click here to download certificate
+            Download Certificate
             <span className="material-icons-round ml-2 text-xl">download</span>
         </button>
 
