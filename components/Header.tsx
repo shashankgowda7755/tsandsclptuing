@@ -9,15 +9,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ onLogoClick, onDownload, onSecretDebug }) => {
   const [clickCount, setClickCount] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = React.useState(false);
 
-  React.useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleLogoClick = () => {
      setClickCount(prev => {
@@ -33,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({ onLogoClick, onDownload, onSecre
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${isScrolled ? 'bg-white shadow-md dark:bg-midnight' : 'bg-transparent'}`}>
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-white shadow-sm dark:bg-midnight transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div 

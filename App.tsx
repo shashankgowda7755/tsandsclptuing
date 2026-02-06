@@ -19,7 +19,7 @@ import { useApp } from './context/AppContext';
 
 // 🚀 Performance: Preload critical assets on app mount
 const preloadAssets = () => {
-  const imagesToPreload = ['/assets/poster.jpeg', '/assets/cleanup_cover.png', '/assets/turtle_cover.png'];
+  const imagesToPreload = ['/assets/finalposter.png', '/assets/cleanup_cover.png', '/assets/turtle_cover.png'];
   imagesToPreload.forEach(src => {
     const img = new Image();
     img.src = src;
