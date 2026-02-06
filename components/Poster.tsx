@@ -38,11 +38,10 @@ export const Poster: React.FC<PosterProps> = ({ id, userData, school, className 
         className="absolute rounded-full overflow-hidden z-10 flex items-center justify-center bg-gray-100/50"
         style={{
           // Adjusted: Extend 0.35% to right (Left 2.25%, W 46.85%)
-          left: '5.5%',
-          top: '22.5%',
+          left: '6.5%',
+          top: '22.6%',
           width: '43%',
-          aspectRatio: '1 / 1', // Forces a perfect circle based on width
-          transform: 'scale(1.1)' // Increased size by 10% as requested
+          aspectRatio: '1 / 1' // Forces a perfect circle based on width
         }}
       >
         {userData.photo ? (
@@ -75,7 +74,7 @@ export const Poster: React.FC<PosterProps> = ({ id, userData, school, className 
           const name = userData.fullName || 'Ram Kumar';
           return (
              <h2
-               className="text-white font-bold tracking-wide leading-none px-1 uppercase"
+               className="text-black font-bold tracking-wide leading-none px-1 uppercase"
                style={{
                  fontFamily: '"Montserrat", sans-serif',
                  fontWeight: 800,
