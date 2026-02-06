@@ -7,13 +7,13 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onStart }) => {
   return (
-    <section className="relative h-screen w-full overflow-hidden flex flex-col items-center justify-end pb-20">
+    <section className="relative h-[calc(100vh-8rem)] mt-32 w-full overflow-hidden flex flex-col items-center justify-end pb-20">
        {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img 
             src="/assets/sand_sculpture_poster.png" 
             alt="Sand Sculpting Contest" 
-            className="w-full h-full object-cover" 
+            className="w-full h-full object-cover object-top" 
         />
         {/* Overlay for better text visibility if needed, though simpler is requested */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
