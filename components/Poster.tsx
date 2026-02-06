@@ -22,31 +22,32 @@ export const Poster: React.FC<PosterProps> = ({ id, userData, school, className 
     <div
       id={id || 'certificate-visual'}
       className={`relative aspect-[1455/2000] bg-white overflow-hidden text-gray-900 mx-auto shadow-sm ${className}`}
+      style={{ containerType: 'inline-size' }}
     >
       {console.log('🖼️ Poster Rendered:', { userData, photo: userData.photo ? 'Present' : 'Missing' })}
 
       {/* Layer 1: Background Image */}
       <img
-        src="/assets/poster.png?v=2"
+        src="/assets/new.png"
         className="absolute inset-0 w-full h-full object-cover"
         alt="Background"
       />
 
       {/* Layer 2: Dynamic User Photo */}
       <div
-        className="absolute rounded-lg overflow-hidden z-10 flex items-center justify-center bg-gray-100/50"
+        className="absolute rounded-full overflow-hidden z-10 flex items-center justify-center bg-gray-100/50"
         style={{
           // Adjusted: Extend 0.35% to right (Left 2.25%, W 46.85%)
-          left: '2.25%',
-          top: '16.8%',
-          width: '46.85%',
-          height: '41%'
+          left: '5.5%',
+          top: '22.5%',
+          width: '43%',
+          aspectRatio: '1 / 1' // Forces a perfect circle based on width
         }}
       >
         {userData.photo ? (
           <img
             src={userData.photo}
-            className="w-full h-full object-cover grayscale"
+            className="w-full h-full object-cover"
             alt="User Photo"
           />
         ) : (
@@ -63,49 +64,28 @@ export const Poster: React.FC<PosterProps> = ({ id, userData, school, className 
         className="absolute z-10 flex flex-col items-start justify-center text-left"
         style={{
           // Shifted left and up to overlay 'HAFIZ KHAN' exactly
-          left: '51%',
-          top: '19.5%',
-          width: '40%',
+          left: '7%',
+          top: '62%',
+          width: '29.3%',
           height: 'auto'
         }}
       >
         {(() => {
           const name = userData.fullName || 'Ram Kumar';
-          const [first, ...rest] = name.split(' ');
-          const last = rest.join(' ');
-          
-          // Logic: If EITHER part > 7 chars, reduce BOTH to ensure uniformity
-          const needsReduction = first.length > 7 || last.length > 7;
-          const uniformSize = needsReduction ? '22px' : '28px';
-
           return (
-            <>
-              <h2
-                className="text-white font-bold tracking-wide leading-none px-1 uppercase"
-                style={{
-                  fontFamily: '"Montserrat", sans-serif',
-                  fontWeight: 800,
-                  fontSize: uniformSize,
-                  textShadow: '0px 2px 4px rgba(0,0,0,0.5)',
-                  marginBottom: '2px'
-                }}
-              >
-                {first}
-              </h2>
-              {last && (
-                <h2
-                  className="text-white font-bold tracking-wide leading-none px-1 uppercase"
-                  style={{
-                    fontFamily: '"Montserrat", sans-serif',
-                    fontWeight: 700, // Kept weight difference for slight hierarchy/style if desired, or make 800 for strict match? User said "same size", implies font-size. keeping weight diff is safer for style unless asked.
-                    fontSize: uniformSize,
-                    textShadow: '0px 2px 4px rgba(0,0,0,0.5)'
-                  }}
-                >
-                  {last}
-                </h2>
-              )}
-            </>
+             <h2
+               className="text-white font-bold tracking-wide leading-none px-1 uppercase"
+               style={{
+                 fontFamily: '"Montserrat", sans-serif',
+                 fontWeight: 800,
+                 fontSize: '4cqi', // ~14px at 350px width, ~58px at 1455px width
+                 textShadow: '0px 0.5cqi 1cqi rgba(0,0,0,0.5)',
+                 marginBottom: '0',
+                 whiteSpace: 'nowrap'
+               }}
+             >
+               DEAR {name}
+             </h2>
           );
         })()}
       </div>

@@ -358,17 +358,13 @@ export const DB = {
     // FORM SUBMISSION (Primary Logic)
     // ========================================
 
-    submitForm: async (schoolId: string, data: StudentData): Promise<Submission> => {
-        const school = INITIAL_SCHOOLS.find(s => s.id === schoolId);
+    submitForm: async (data: StudentData): Promise<Submission> => {
+
 
         // Create submission object
         const newSubmission: Submission = {
             id: generateId(),
-            schoolId,
-            schoolName: school?.name || 'Unknown School',
             studentName: data.name,
-            grade: data.grade || '',
-            section: data.section || '',
             phone: data.phone,
             email: data.email,
             timestamp: new Date().toISOString(),
@@ -436,16 +432,13 @@ export const DB = {
     exportData: (): string => {
         const submissions = DB.getSubmissions();
         const headers = [
-            'Submission ID', 'Organization/School', 'Name',
-            'Class', 'Section', 'Phone', 'Email',
+            'Submission ID', 'Name', 
+            'Phone', 'Email',
             'Date', 'Downloaded'
         ];
         const rows = submissions.map(s => [
             s.id,
-            s.schoolName,
             s.studentName,
-            s.grade || '-',
-            s.section || '-',
             s.phone,
             s.email,
             new Date(s.timestamp).toLocaleString(),

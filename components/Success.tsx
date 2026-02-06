@@ -27,17 +27,14 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
 
       const studentData = {
         name: userData.fullName,
-        grade: userData.class,
-        section: userData.section,
         phone: `${userData.countryCode} ${userData.phone}`,
         email: userData.email,
-        message: 'I Pledge to protect marine life',
         photoUrl: userData.photo,
         optIn: userData.optInSimilarEvents
       };
 
       // Async submission
-      DB.submitForm(selectedSchool.id, studentData)
+      DB.submitForm(studentData)
         .then(() => console.log("✅ Data submitted to Google Sheets"))
         .catch(e => console.error("❌ Submission error:", e));
     }
@@ -74,39 +71,19 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
       clone.style.boxShadow = 'none';
       clone.style.borderRadius = '0'; // Ensure no rounded corners on the output image
 
-      // Fix text size for the HD clone (since we forced width to 800px)
-      // Since we changed to multiple h2s in Poster.tsx, we need to style them individually
-      const nameContainer = clone.querySelector('div[style*="left: 51%"]');
+      // Manual adjustments for Download Clone
+      const nameContainer = clone.querySelector('div[style*="left: 7%"]');
       if (nameContainer) {
-        const h2Elements = nameContainer.querySelectorAll('h2');
-        const nameText = userData.fullName || '';
-        const [first, ...rest] = nameText.split(' ');
-        const last = rest.join(' ');
-
-        // Logic: If EITHER > 7 chars, reduce BOTH by ~20%
-        // Base: 85px -> Reduced: 68px
-        const needsReduction = first.length > 7 || last.length > 7;
-        const uniformSize = needsReduction ? '68px' : '85px';
-
-        h2Elements.forEach((el, index) => {
-           const h2 = el as HTMLElement;
-           const isFirst = index === 0;
-
-           h2.style.fontSize = uniformSize;
-           h2.style.whiteSpace = 'nowrap';
-           h2.style.fontWeight = isFirst ? '800' : '700';
-           h2.style.textAlign = 'left'; 
-           h2.style.fontFamily = '"Montserrat", sans-serif';
-           h2.style.marginBottom = isFirst ? '5px' : '0'; // Add spacing between lines
-           h2.style.display = 'block'; // Ensure block display for vertical stacking
-        });
+        // User requested moving text up specifically for download
+        // Original in Poster.tsx is 62%, shifting up to 60% for download
+        (nameContainer as HTMLElement).style.top = '60%';
       }
 
       // Explicitly apply grayscale to user photo for html2canvas to pick it up
       const userPhotoImg = clone.querySelector('img[alt="User Photo"]');
       if (userPhotoImg) {
-        (userPhotoImg as HTMLElement).style.filter = 'grayscale(100%)';
-        (userPhotoImg as HTMLElement).style.webkitFilter = 'grayscale(100%)';
+        // (userPhotoImg as HTMLElement).style.filter = 'grayscale(100%)'; // REMOVED
+        // (userPhotoImg as HTMLElement).style.webkitFilter = 'grayscale(100%)'; // REMOVED
       }
 
       document.body.appendChild(clone);
@@ -114,7 +91,7 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
       // 2. Add Background Image (with cache busting)
       const bgImg = new Image();
       bgImg.crossOrigin = 'anonymous';
-      bgImg.src = '/assets/poster.png?v=2'; // Force refresh
+      bgImg.src = '/assets/new.png'; // Force refresh
       await new Promise<void>((resolve, reject) => {setTimeout(resolve, 100);});
 
       // D. Render the Clone to an Image using html2canvas

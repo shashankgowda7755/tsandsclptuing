@@ -60,9 +60,7 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onGroupRegister }) => {
                 Saving Our<br/>
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-teal-200">Sea Turtles.</span>
             </h1>
-            <p className={`text-lg md:text-2xl text-gray-100 mb-8 md:mb-12 max-w-2xl font-medium leading-relaxed drop-shadow-md ${currentSlide.alignment === 'center' ? 'mx-auto' : ''}`}>
-                Join Chennai's oldest community-led conservation effort. Patrolling Marina to Besant Nagar since 1988.
-            </p>
+                Join Chennai's oldest community-led conservation effort. Patrolling Marina to Besant Nagar.
             
             <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 ${currentSlide.alignment === 'center' ? 'justify-center' : 'justify-start'}`}>
                 <button 
@@ -72,13 +70,7 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onGroupRegister }) => {
                     Download Certificate
                     <span className="material-icons-round ml-2 text-lg sm:text-xl">download</span>
                 </button>
-                <button 
-                    onClick={onGroupRegister}
-                    className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold rounded-full text-white border-2 border-white/30 bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all"
-                >
-                    JOIN US FOR WALKS
-                    <span className="material-icons-round ml-2 text-lg sm:text-xl">groups</span>
-                </button>
+
             </div>
         </div>
       </div>

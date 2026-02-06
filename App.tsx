@@ -40,11 +40,8 @@ const App: React.FC = () => {
     fullName: '',
     email: '',
     phone: '',
-    class: '',
-    section: '', 
     countryCode: '+91',
-    photo: '',
-    optInSimilarEvents: true
+    photo: ''
   });
 
   // 🚀 Preload assets on mount and set title
@@ -102,8 +99,6 @@ const App: React.FC = () => {
       fullName: '',
       email: '',
       phone: '',
-      class: '',
-      section: '',
       countryCode: '+91',
       photo: ''
     });

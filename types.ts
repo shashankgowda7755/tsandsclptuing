@@ -33,11 +33,8 @@ export interface School {
 
 export interface StudentData {
   name: string;
-  grade: string;
-  section: string;
   phone: string;
   email: string;
-  message: string;
   photoUrl: string | null;
   optIn?: boolean;
 }
@@ -47,8 +44,6 @@ export interface UserData {
   fullName: string;
   email: string;
   phone: string;
-  class: string;
-  section: string;
   countryCode: string;
   photo: string;
   optInSimilarEvents?: boolean;
@@ -56,11 +51,7 @@ export interface UserData {
 
 export interface Submission {
   id: string;                 // UUID generated on submission
-  schoolId: string;           // Foreign key to School.id
-  schoolName: string;         // Cached for easy exports
   studentName: string;        // From StudentData.name
-  grade?: string;             // Optional field
-  section?: string;           // Optional field
   phone: string;              // Required contact
   email: string;              // Required contact
   timestamp: string;          // ISO 8601 format
