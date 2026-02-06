@@ -18,7 +18,8 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onGroupRegister }) => {
     { image: '/assets/turtle_hero_bg_3.png', alignment: 'left' },
     { image: '/assets/turtle_hero_bg_2.jpg', alignment: 'center' },
     { image: '/assets/turtle_hero_bg.jpeg', alignment: 'center' },
-    { image: '/assets/turtle_sand_sculpture.png', alignment: 'center' }
+    { image: '/assets/turtle_sand_sculpture.png', alignment: 'center' },
+    { image: '/assets/sand_sculpture_hero_new.png', alignment: 'center' }
   ];
 
   React.useEffect(() => {
