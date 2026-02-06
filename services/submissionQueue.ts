@@ -78,6 +78,7 @@ export const processQueue = async () => {
       markBatchAsSynced(batchToSync);
     } else {
       console.warn('⚠️ Batch sync failed, attempting sequential sync:', error.message);
+      // alert(`Debug: Batch sync failed: ${error.message}`); // Optional debug
 
       // 3. Fallback: Sequential Sync
       // If batch fails (e.g. payload issue), try one by one to save as much as possible.
