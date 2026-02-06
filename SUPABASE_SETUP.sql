@@ -29,6 +29,12 @@ create policy "Enable insert for anon"
 on public.submissions for insert
 with check (true);
 
+-- Policy B: Allow Select (Read-Only)
+-- Useful if the client tries to read back the data (though we removed it from the code, safe to have)
+create policy "Enable select for anon"
+on public.submissions for select
+using (true);
+
 -- 5. SECURE FUNCTION FOR UPDATES (RPC)
 create or replace function mark_downloaded(sub_id uuid)
 returns void
