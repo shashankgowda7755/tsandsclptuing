@@ -6,7 +6,7 @@ import { WhatWeDoSection } from './WhatWeDoSection';
 import { GetInvolvedSection } from './GetInvolvedSection';
 import { FeaturedStorySection } from './FeaturedStorySection';
 import { EventSection } from './EventSection';
-import { SandSculptureHero } from './SandSculptureHero';
+import { Hero } from './Hero';
 
 interface HomeSectionsProps {
   onJoin?: () => void;
@@ -18,7 +18,7 @@ export const HomeSections: React.FC<HomeSectionsProps> = ({ onJoin, onStart, onI
   return (
     <div className="flex flex-col gap-0">
       {/* New Hero Section */}
-      <SandSculptureHero onDownload={onStart || (() => {})} />
+      <Hero onStart={onStart || (() => {})} />
       
       <InitiativesSection onJoin={onJoin} onInitiativeClick={onInitiativeClick} />
       
