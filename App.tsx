@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { AppProvider } from './context/AppContext';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { HomeSections } from './components/HomeSections';
+
 import { Footer } from './components/Footer';
 import { UserForm } from './components/UserForm';
 import { GroupRegistrationForm } from './components/GroupRegistrationForm';
@@ -126,10 +126,6 @@ const App: React.FC = () => {
         {currentStep === Step.Home && (
           <>
             <Hero onStart={handleStart} onGroupRegister={() => goToStep(Step.GroupRegistration)} />
-            <HomeSections 
-                onJoin={() => goToStep(Step.GroupRegistration)} 
-                onInitiativeClick={handleInitiativeClick}
-            />
           </>
         )}
 
