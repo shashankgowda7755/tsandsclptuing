@@ -41,7 +41,8 @@ export const Poster: React.FC<PosterProps> = ({ id, userData, school, className 
           left: '5.5%',
           top: '22.5%',
           width: '43%',
-          aspectRatio: '1 / 1' // Forces a perfect circle based on width
+          aspectRatio: '1 / 1', // Forces a perfect circle based on width
+          transform: 'scale(1.1)' // Increased size by 10% as requested
         }}
       >
         {userData.photo ? (
