@@ -5,7 +5,8 @@ export enum Step {
   Reading,
   Success,
   GroupRegistration,
-  InitiativeDetails
+  InitiativeDetails,
+  Debug
 }
 
 // Basic types shared across the app

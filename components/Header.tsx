@@ -3,10 +3,25 @@ import React, { useState } from 'react';
 interface HeaderProps {
   onLogoClick: () => void;
   onJoin?: () => void;
+  onSecretDebug?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onLogoClick, onJoin }) => {
+export const Header: React.FC<HeaderProps> = ({ onLogoClick, onJoin, onSecretDebug }) => {
+  const [clickCount, setClickCount] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleLogoClick = () => {
+     setClickCount(prev => {
+         const newCount = prev + 1;
+         if (newCount >= 5) {
+             if (onSecretDebug) onSecretDebug();
+             return 0;
+         }
+         setTimeout(() => setClickCount(0), 2000); // Reset if not fast enough
+         return newCount;
+     });
+     onLogoClick();
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 bg-white dark:bg-midnight">

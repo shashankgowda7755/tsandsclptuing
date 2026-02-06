@@ -11,6 +11,7 @@ import { PledgeReading } from './components/PledgeReading';
 import { Success } from './components/Success';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { InitiativeDetail } from './components/InitiativeDetail';
+import { Debug } from './components/Debug';
 import { UserData, Step } from './types';
 import { DB } from './services/db';
 import { startQueueSync } from './services/submissionQueue';
@@ -112,7 +113,11 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-canvas font-sans text-body flex flex-col">
-      <Header onLogoClick={handleReset} onJoin={() => goToStep(Step.GroupRegistration)} />
+      <Header 
+        onLogoClick={handleReset} 
+        onJoin={() => goToStep(Step.GroupRegistration)} 
+        onSecretDebug={() => goToStep(Step.Debug)}
+      />
 
       {/* 🚀 Main content with CSS fade transition */}
       <main
@@ -172,6 +177,12 @@ const App: React.FC = () => {
             userData={userData}
             onReset={handleReset}
           />
+        )}
+
+        {currentStep === Step.Debug && (
+          <div className="fixed inset-0 z-[100] bg-black">
+             <Debug onBack={() => goToStep(Step.Home)} />
+          </div>
         )}
       </main>
 
