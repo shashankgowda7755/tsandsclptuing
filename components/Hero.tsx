@@ -16,10 +16,8 @@ export const Hero: React.FC<HeroProps> = ({ onStart, onGroupRegister }) => {
   
   const slides: SlideConfig[] = [
     { image: '/assets/turtle_hero_bg_3.png', alignment: 'left' },
-    { image: '/assets/turtle_hero_bg_2.jpg', alignment: 'center' },
-    { image: '/assets/turtle_hero_bg.jpeg', alignment: 'center' },
-    { image: '/assets/turtle_sand_sculpture.png', alignment: 'center' },
-    { image: '/assets/sand_sculpture_hero_new.png', alignment: 'center' }
+    { image: '/assets/turtle_hero_bg_2.jpg', alignment: 'center' }, // "smaw int middle" interpreted as center
+    { image: '/assets/turtle_hero_bg.jpeg', alignment: 'center' }
   ];
 
   React.useEffect(() => {
