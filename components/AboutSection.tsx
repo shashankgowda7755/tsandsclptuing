@@ -42,7 +42,7 @@ export const AboutSection: React.FC = () => {
               </p>
             </div>
             
-            <a 
+            {/* <a 
               href="https://en.wikipedia.org/wiki/Olive_ridley_sea_turtle"
               target="_blank"
               rel="noopener noreferrer"
@@ -50,7 +50,7 @@ export const AboutSection: React.FC = () => {
             >
               Read Our Full Story
               <span className="material-icons-round">arrow_forward</span>
-            </a>
+            </a> */}
           </div>
         </div>
       </div>

@@ -63,7 +63,8 @@ export const BlogSection: React.FC = () => {
                 <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6 flex-1">
                   {post.excerpt}
                 </p>
-                <a 
+                {/* Link Removed */}
+                {/* <a 
                   href="https://www.youtube.com/results?search_query=olive+ridley+turtle+conservation"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -71,7 +72,7 @@ export const BlogSection: React.FC = () => {
                 >
                   Read Article
                   <span className="material-icons-round text-lg">arrow_right_alt</span>
-                </a>
+                </a> */}
               </div>
             </article>
           ))}

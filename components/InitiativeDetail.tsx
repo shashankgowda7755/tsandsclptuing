@@ -101,10 +101,10 @@ export const InitiativeDetail: React.FC<InitiativeDetailProps> = ({ initiativeId
                         </button>
 
                         <p className="text-slate-500 dark:text-slate-400 mb-6 text-sm mt-8">Follow us on Instagram for the latest updates and event details.</p>
-                        <a href="https://www.instagram.com/communitreeindia/" target="_blank" rel="noreferrer"
-                            className="block w-full py-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold text-center rounded-xl transition-all shadow-lg shadow-pink-500/20 transform hover:-translate-y-1">
+                        <div
+                            className="block w-full py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-center rounded-xl transition-all shadow-lg shadow-pink-500/20 opacity-70 cursor-not-allowed">
                             Visit Instagram
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -162,7 +162,7 @@ export const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onClose }) => {
                         <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 mt-2">
                             <p className="text-sm leading-relaxed">
                                 To exercise any of these rights, or to request that we stop using your data, you can contact us at: <br />
-                                <a href="mailto:support@comcommunity.co.in" className="font-bold text-blue-700 hover:underline">support@comcommunity.co.in</a>
+                                <span className="font-bold text-blue-700">support@comcommunity.co.in</span>
                             </p>
                         </div>
                         <p className="text-sm leading-relaxed mt-2">
@@ -228,9 +228,9 @@ export const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onClose }) => {
                                 </div>
                                 <div>
                                     <p className="text-xs text-stone-400 uppercase tracking-widest font-bold">Email Support</p>
-                                    <a href="mailto:support@comcommunity.co.in" className="text-white font-medium hover:text-orange-300 transition-colors">
+                                    <p className="text-white font-medium">
                                         support@comcommunity.co.in
-                                    </a>
+                                    </p>
                                 </div>
                             </div>
                         </div>

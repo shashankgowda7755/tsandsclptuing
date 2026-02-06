@@ -33,7 +33,7 @@ export const FeaturedStorySection: React.FC = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <a 
+                {/* <a 
                   href="https://en.wikipedia.org/wiki/Olive_ridley_sea_turtle#Conservation"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -41,15 +41,15 @@ export const FeaturedStorySection: React.FC = () => {
                 >
                   View Full Report
                   <span className="material-icons-round">assessment</span>
-                </a>
-                <a 
+                </a> */}
+                {/* <a 
                   href="https://www.youtube.com/results?search_query=olive+ridley+hatchlings+chennai"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold rounded-2xl hover:bg-white/20 transition-all flex items-center justify-center"
                 >
                   Watch Highlights
-                </a>
+                </a> */}
               </div>
             </div>
           </div>

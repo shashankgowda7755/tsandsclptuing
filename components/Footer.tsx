@@ -37,13 +37,16 @@ export const Footer: React.FC<FooterProps> = ({ onPrivacyClick }) => {
 };
 
 const SocialLink: React.FC<{ href: string; icon: React.ReactNode; color: string; label: string }> = ({ href, icon, color, label }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label={label}
-    className={`w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center text-stone-400 hover:text-white transition-all transform hover:scale-110 ${color}`}
-  >
-    {icon}
-  </a>
+  // <a
+  //   href={href}
+  //   target="_blank"
+  //   rel="noopener noreferrer"
+  //   aria-label={label}
+  //   className={`w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center text-stone-400 hover:text-white transition-all transform hover:scale-110 ${color}`}
+  // >
+  //   {icon}
+  // </a>
+  <div className={`w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center text-stone-600 cursor-not-allowed ${color}`}>
+      {icon}
+  </div>
 );
