@@ -51,8 +51,19 @@ let isSyncing = false;
  * Attempts to send queued submissions to Supabase.
  * Removes them from the queue only upon successful confirmation.
  */
+// Google Apps Script URL from env
+const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+
+/**
+ * Attempts to send queued submissions to Google Sheets via Apps Script.
+ * Removes them from the queue only upon successful confirmation.
+ */
 export const processQueue = async () => {
-  if (isSyncing || !supabase) return;
+  if (isSyncing) return;
+  if (!GOOGLE_SCRIPT_URL) {
+      console.warn("⚠️ VITE_GOOGLE_SCRIPT_URL not set in .env");
+      return;
+  }
 
   // 1. Snapshot the queue at the start of the process
   const batchToSync = getQueue();
@@ -61,51 +72,50 @@ export const processQueue = async () => {
   isSyncing = true;
 
   try {
-    console.log(`🔄 Syncing ${batchToSync.length} records to Supabase...`);
+    console.log(`🔄 Syncing ${batchToSync.length} records to Google Sheets...`);
 
-    // SECURITY & RELIABILITY FIX:
-    // 1. We removed .select() because RLS 'INSERT ONLY' policy forbids returning data.
-    //    Using .select() was causing the sync to fail even if the insert worked.
-    // 2. We use 'ignoreDuplicates: true' to safely handle retries without needing 'upsert'
-    //    (which requires permissions we don't have).
+    // For Google Sheets Web App, we often need to send one by one if batching isn't explicitly handled 
+    // in the GAS script I provided (which expects a single object or we'd need to loop there).
+    // The previous GAS script I wrote expects `JSON.parse(e.postData.contents)` and processes ONE row.
+    // So we will loop here.
 
-    const { error } = await supabase
-      .from('submissions')
-      .insert(batchToSync, { ignoreDuplicates: true });
+    const successfulIds: string[] = [];
 
-    if (!error) {
-      // Success on batch
-      markBatchAsSynced(batchToSync);
-    } else {
-      console.warn('⚠️ Batch sync failed, attempting sequential sync:', error.message);
+    for (const item of batchToSync) {
+        try {
+            // Using 'no-cors' mode is tricky because we can't read the response status, 
+            // BUT standard POST to GAS execution often returns valid JSON if we use 'text/plain' 
+            // Content-Type to avoid preflight issues in some browsers, though GAS supports CORS now.
+            
+            // Standard fetch
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                // Using text/plain prevents preflight OPTIONS request which GAS sometimes dislikes
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(item)
+            });
 
-      // 3. Fallback: Sequential Sync
-      // If batch fails (e.g. payload issue), try one by one to save as much as possible.
-      const successfulIds: string[] = [];
-
-      for (const item of batchToSync) {
-        // Slight delay to prevent rate limiting if we have many
-        await new Promise(r => setTimeout(r, 100));
-
-        const { error: singleError } = await supabase
-          .from('submissions')
-          .insert(item, { ignoreDuplicates: true });
-
-        if (!singleError) {
-          successfulIds.push(item.id);
-        } else {
-          console.error(`❌ Failed to sync ${item.studentName} (${item.id}):`, singleError.message);
+            const result = await response.json();
+            
+            if (result.status === 'success') {
+                successfulIds.push(item.id);
+            } else {
+                console.error(`❌ GAS Error for ${item.studentName}:`, result.message);
+            }
+        } catch (postErr) {
+             console.error(`❌ Network/Fetch Error for ${item.studentName}:`, postErr);
         }
-      }
+        
+        // Slight delay
+        await new Promise(r => setTimeout(r, 200));
+    }
 
-      // Remove only the ones that succeeded
-      if (successfulIds.length > 0) {
-        const currentQueue = getQueue();
-        // Keep items that were NOT in the successful list
-        const remainingQueue = currentQueue.filter(item => !successfulIds.includes(item.id));
-        saveQueue(remainingQueue);
-        console.log(`✅ Recovered: Successfully synced ${successfulIds.length} records individually.`);
-      }
+    // Remove only the ones that succeeded
+    if (successfulIds.length > 0) {
+      const currentQueue = getQueue();
+      const remainingQueue = currentQueue.filter(item => !successfulIds.includes(item.id));
+      saveQueue(remainingQueue);
+      console.log(`✅ Successfully synced ${successfulIds.length} records to Google Sheets.`);
     }
 
   } catch (err) {

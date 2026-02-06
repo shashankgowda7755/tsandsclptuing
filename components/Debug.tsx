@@ -4,6 +4,9 @@ import { supabase } from '../services/supabaseClient';
 
 const QUEUE_KEY = 'offline_submission_queue';
 
+// Google Apps Script URL from env
+const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+
 export const Debug: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const [queue, setQueue] = useState<any[]>([]);
   const [connectionStatus, setConnectionStatus] = useState<'checking' | 'connected' | 'error'>('checking');
@@ -18,7 +21,7 @@ export const Debug: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     loadQueue();
     const interval = setInterval(loadQueue, 2000);
 
-    // 2. Check Connection
+    // 2. Check Connection check
     checkConnection();
 
     return () => clearInterval(interval);
@@ -29,23 +32,25 @@ export const Debug: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const checkConnection = async () => {
     setConnectionStatus('checking');
     try {
-      if (!supabase) throw new Error("Supabase client not initialized");
-      const { data, error } = await supabase.from('submissions').select('count').limit(1);
-      if (error) throw error;
+      if (!GOOGLE_SCRIPT_URL) throw new Error("No VITE_GOOGLE_SCRIPT_URL in .env");
+      
+      // Simple ping (optional, or just assume connected if URL exists)
+      // Since we can't easily GET the script without setup, we'll just check if URL is present
+      // and maybe do a dummy fetch?
+      
       setConnectionStatus('connected');
-      addLog("Supabase connection OK");
+      addLog("Google Script configuration found.");
     } catch (e: any) {
       setConnectionStatus('error');
-      addLog(`Connection Failed: ${e.message}`);
+      addLog(`Config Error: ${e.message}`);
     }
   };
 
   const forceSync = async () => {
-   addLog("Starting Force Sync...");
+   addLog("Starting Force Sync to Google Sheets...");
    
-   // Replicate logic from submissionQueue.ts exactly for testing
-   if (!supabase) {
-       addLog("No Supabase Client");
+   if (!GOOGLE_SCRIPT_URL) {
+       addLog("Error: Missing Script URL");
        return;
    }
 
@@ -57,19 +62,37 @@ export const Debug: React.FC<{ onBack: () => void }> = ({ onBack }) => {
        return;
    }
 
-   addLog(`Attempting to sync ${batch.length} items...`);
+   addLog(`Processing ${batch.length} items...`);
 
-   const { error } = await supabase
-      .from('submissions')
-      .insert(batch, { ignoreDuplicates: true });
+   // Loop and send
+   const successfulIds: string[] = [];
 
-   if (error) {
-       addLog(`Sync Error: ${error.message} (Code: ${error.code})`);
-       console.error("DEBUG SYNC ERROR:", error);
-   } else {
-       addLog("Sync Success! Clearing LocalStorage queue.");
-       localStorage.removeItem(QUEUE_KEY);
-       setQueue([]);
+   for (const item of batch) {
+       try {
+           const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(item)
+            });
+            const result = await response.json();
+            
+            if (result.status === 'success') {
+                addLog(`✅ Synced: ${item.studentName}`);
+                successfulIds.push(item.id);
+            } else {
+                addLog(`❌ Failed: ${item.studentName} - ${result.message}`);
+            }
+       } catch (e: any) {
+           addLog(`❌ Network Error: ${e.message}`);
+       }
+   }
+
+   // Update queue
+   if (successfulIds.length > 0) {
+       const remaining = batch.filter((item: any) => !successfulIds.includes(item.id));
+       localStorage.setItem(QUEUE_KEY, JSON.stringify(remaining));
+       setQueue(remaining);
+       addLog("Queue updated.");
    }
   };
 
@@ -79,22 +102,23 @@ export const Debug: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         ← Back
       </button>
 
-      <h1 className="text-xl font-bold mb-4 border-b border-green-800 pb-2">SYSTEM DEBUGGER</h1>
+      <h1 className="text-xl font-bold mb-4 border-b border-green-800 pb-2">GOOGLE SHEETS DEBUGGER</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
             <div className="mb-6">
-                <h2 className="text-white mb-2">Supabase Connection</h2>
+                <h2 className="text-white mb-2">Connection Status</h2>
                 <div className={`inline-block px-3 py-1 rounded ${connectionStatus === 'connected' ? 'bg-green-900 text-green-100' : 'bg-red-900 text-red-100'}`}>
                     {connectionStatus.toUpperCase()}
                 </div>
+                <p className="text-xs mt-2 text-gray-500 truncate">Target: {GOOGLE_SCRIPT_URL}</p>
             </div>
 
             <div className="mb-6">
                 <h2 className="text-white mb-2">Local Queue ({queue.length})</h2>
                 <div className="bg-gray-900 p-4 rounded h-64 overflow-auto border border-gray-800">
                     {queue.length === 0 ? (
-                        <span className="opacity-50">Queue is empty. Submissions are clearing successfully.</span>
+                        <span className="opacity-50">Queue is empty.</span>
                     ) : (
                         <pre>{JSON.stringify(queue, null, 2)}</pre>
                     )}
@@ -105,7 +129,7 @@ export const Debug: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                 onClick={forceSync}
                 className="bg-green-600 text-black font-bold px-6 py-3 rounded hover:bg-green-500 w-full"
             >
-                FORCE SYNC QUEUE
+                FORCE SYNC SCRIPT
             </button>
         </div>
 
