@@ -22,7 +22,8 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
   // SUBMIT TO GOOGLE SHEETS - ONCE ON MOUNT
   // ========================================
   useEffect(() => {
-    if (!hasSubmitted.current && selectedSchool) {
+    // Only submit if we haven't already
+    if (!hasSubmitted.current) {
       hasSubmitted.current = true;
 
       const studentData = {
@@ -38,7 +39,7 @@ export const Success: React.FC<SuccessProps> = ({ userData, onReset }) => {
         .then(() => console.log("✅ Data submitted to Google Sheets"))
         .catch(e => console.error("❌ Submission error:", e));
     }
-  }, []); // Empty deps = runs once on mount
+  }, []); // Run once on mount
 
   // 3. THE GENERATION LOGIC (The "Invisible Clone" Strategy)
   const generateImageBlob = async (): Promise<Blob | null> => {
